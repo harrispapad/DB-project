@@ -1,0 +1,56 @@
+CREATE DATABASE  IF NOT EXISTS `masterchef` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `masterchef`;
+-- MySQL dump 10.13  Distrib 8.0.36, for Linux (x86_64)
+--
+-- Host: localhost    Database: masterchef
+-- ------------------------------------------------------
+-- Server version	8.0.36-0ubuntu0.23.10.1
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `episode_judge`
+--
+
+DROP TABLE IF EXISTS `episode_judge`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `episode_judge` (
+  `episode_id` int NOT NULL,
+  `judge_id` int NOT NULL,
+  KEY `fk_episode_judge_judge_id_idx` (`judge_id`),
+  KEY `fk_episode_judge_episode_id_idx` (`episode_id`),
+  CONSTRAINT `fk_episode_judge_episode_id` FOREIGN KEY (`episode_id`) REFERENCES `episode` (`episode_id`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `fk_episode_judge_judge_id` FOREIGN KEY (`judge_id`) REFERENCES `judge` (`judge_id`) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `episode_judge`
+--
+
+LOCK TABLES `episode_judge` WRITE;
+/*!40000 ALTER TABLE `episode_judge` DISABLE KEYS */;
+INSERT INTO `episode_judge` VALUES (101,1500),(101,1260),(101,1340),(102,1700),(102,1090),(102,1200),(103,1230),(103,1670),(103,1740),(104,1380),(104,1080),(104,1260),(105,1520),(105,1650),(105,1230),(106,1610),(106,1500),(106,1600),(107,1320),(107,1740),(107,1610),(108,1600),(108,1440),(108,1730),(109,1380),(109,1730),(109,1600),(110,1740),(110,1650),(110,1200),(201,2680),(201,2040),(201,2570),(202,2540),(202,2350),(202,2290),(203,2570),(203,2160),(203,2620),(204,2220),(204,2680),(204,2460),(205,2590),(205,2130),(205,2430),(206,2280),(206,2620),(206,2350),(207,2020),(207,2680),(207,2150),(208,2350),(208,2530),(208,2590),(209,2160),(209,2350),(209,2040),(210,2370),(210,2590),(210,2150);
+/*!40000 ALTER TABLE `episode_judge` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2024-05-24  9:01:29
