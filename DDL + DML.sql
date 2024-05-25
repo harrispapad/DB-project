@@ -567,7 +567,7 @@ UNLOCK TABLES;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
@@ -994,7 +994,7 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
@@ -1044,7 +1044,7 @@ DELIMITER ;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
 /*!50001 SET character_set_client      = utf8mb4 */;
 /*!50001 SET character_set_results     = utf8mb4 */;
-/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 SET collation_connection      = utf8mb4_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`harris`@`localhost` SQL SECURITY DEFINER */
 /*!50001 VIEW `recipe_equipment_view` AS select `recipe_equipment`.`recipe_id` AS `recipe_id`,`recipe_equipment`.`equipment_name` AS `equipment_name` from `recipe_equipment` where `recipe_equipment`.`recipe_id` in (select `recipe_view`.`recipe_id` from `recipe_view`) */;
@@ -1062,7 +1062,7 @@ DELIMITER ;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
 /*!50001 SET character_set_client      = utf8mb4 */;
 /*!50001 SET character_set_results     = utf8mb4 */;
-/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 SET collation_connection      = utf8mb4_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`harris`@`localhost` SQL SECURITY DEFINER */
 /*!50001 VIEW `recipe_ingredient_view` AS select `recipe_ingredient`.`recipe_id` AS `recipe_id`,`recipe_ingredient`.`ingredient` AS `ingredient`,`recipe_ingredient`.`amount` AS `amount`,`recipe_ingredient`.`grams` AS `grams` from `recipe_ingredient` where `recipe_ingredient`.`recipe_id` in (select `recipe_view`.`recipe_id` from `recipe_view`) */;
@@ -1080,7 +1080,7 @@ DELIMITER ;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
 /*!50001 SET character_set_client      = utf8mb4 */;
 /*!50001 SET character_set_results     = utf8mb4 */;
-/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 SET collation_connection      = utf8mb4_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`harris`@`localhost` SQL SECURITY DEFINER */
 /*!50001 VIEW `recipe_meal_view` AS select `recipe_meal`.`recipe_id` AS `recipe_id`,`recipe_meal`.`meal` AS `meal` from `recipe_meal` where `recipe_meal`.`recipe_id` in (select `recipe_view`.`recipe_id` from `recipe_view`) */;
@@ -1098,7 +1098,7 @@ DELIMITER ;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
 /*!50001 SET character_set_client      = utf8mb4 */;
 /*!50001 SET character_set_results     = utf8mb4 */;
-/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 SET collation_connection      = utf8mb4_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`harris`@`localhost` SQL SECURITY DEFINER */
 /*!50001 VIEW `recipe_tag_view` AS select `recipe_tag`.`recipe_id` AS `recipe_id`,`recipe_tag`.`tag` AS `tag` from `recipe_tag` where `recipe_tag`.`recipe_id` in (select `recipe_view`.`recipe_id` from `recipe_view`) */;
@@ -1116,7 +1116,7 @@ DELIMITER ;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
 /*!50001 SET character_set_client      = utf8mb4 */;
 /*!50001 SET character_set_results     = utf8mb4 */;
-/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 SET collation_connection      = utf8mb4_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`harris`@`localhost` SQL SECURITY DEFINER */
 /*!50001 VIEW `recipe_view` AS select `recipe`.`recipe_id` AS `recipe_id`,`recipe`.`name` AS `name`,`recipe`.`sweet` AS `sweet`,`recipe`.`ethnicity` AS `ethnicity`,`recipe`.`difficulty` AS `difficulty`,`recipe`.`brief` AS `brief`,`recipe`.`number_steps` AS `number_steps`,`recipe`.`main_ingredient` AS `main_ingredient`,`recipe`.`img_url` AS `img`,`recipe`.`img_descr` AS `img_descr`,`recipe`.`theme_name` AS `theme_name`,`recipe`.`portions` AS `portions`,`recipe`.`tip1` AS `tip1`,`recipe`.`tip2` AS `tip2`,`recipe`.`tip3` AS `tip3`,`recipe`.`cooking_time` AS `cooking_time`,`recipe`.`preparation_time` AS `preparation_time` from `recipe` where `recipe`.`recipe_id` in (select `assignment`.`recipe_id` from `assignment` where (`assignment`.`chef_id` = 105)) */;
