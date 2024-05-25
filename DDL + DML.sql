@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `masterchef` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `masterchef`;
 -- MySQL dump 10.13  Distrib 8.0.36, for Linux (x86_64)
 --
 -- Host: localhost    Database: masterchef
@@ -16,6 +18,28 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `assignment`
+--
+
+DROP TABLE IF EXISTS `assignment`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `assignment` (
+  `assignment_id` int NOT NULL,
+  `chef_id` int NOT NULL,
+  `recipe_id` int NOT NULL,
+  `result` int DEFAULT NULL,
+  `year` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`assignment_id`),
+  KEY `chef_id` (`chef_id`),
+  KEY `recipe_id` (`recipe_id`),
+  KEY `idx_assignment_id` (`recipe_id`),
+  CONSTRAINT `fk_assignment_chef` FOREIGN KEY (`chef_id`) REFERENCES `chef` (`chef_id`) ON UPDATE CASCADE,
+  CONSTRAINT `fk_assignment_recipe` FOREIGN KEY (`recipe_id`) REFERENCES `recipe` (`recipe_id`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `assignment`
 --
 
@@ -24,6 +48,25 @@ LOCK TABLES `assignment` WRITE;
 INSERT INTO `assignment` VALUES (100,109,12,2,'1'),(101,123,34,3,'1'),(102,138,17,1,'1'),(103,150,19,5,'1'),(104,160,58,3,'1'),(105,126,64,4,'1'),(106,138,29,4,'1'),(107,141,16,2,'1'),(108,147,34,4,'1'),(109,141,6,3,'1'),(110,134,36,3,'1'),(111,109,27,2,'1'),(112,155,61,4,'1'),(113,141,29,2,'1'),(114,170,47,1,'1'),(115,141,29,3,'1'),(116,127,27,4,'1'),(117,165,69,4,'1'),(118,108,11,3,'1'),(119,108,1,2,'1'),(120,141,32,3,'1'),(121,108,11,4,'1'),(122,144,36,2,'1'),(123,147,41,3,'1'),(124,169,66,2,'1'),(125,138,16,4,'1'),(126,126,9,2,'1'),(127,150,19,2,'1'),(128,151,56,3,'1'),(129,170,7,3,'1'),(130,134,13,4,'1'),(131,123,34,3,'1'),(132,114,49,2,'1'),(133,161,67,3,'1'),(134,161,63,5,'1'),(135,132,8,3,'1'),(136,109,12,3,'1'),(137,105,31,3,'1'),(138,109,14,3,'1'),(139,170,24,4,'1'),(140,114,20,4,'1'),(141,144,35,2,'1'),(142,105,21,3,'1'),(143,123,40,2,'1'),(144,173,44,3,'1'),(145,105,23,2,'1'),(146,151,56,4,'1'),(147,109,26,2,'1'),(148,170,24,5,'1'),(149,114,10,3,'1'),(150,126,64,3,'1'),(151,127,3,2,'1'),(152,165,67,2,'1'),(153,123,34,3,'1'),(154,108,5,4,'1'),(155,138,17,3,'1'),(156,160,61,3,'1'),(157,108,1,2,'1'),(158,127,3,1,'1'),(159,141,32,2,'1'),(160,127,12,3,'1'),(161,167,23,4,'1'),(162,127,12,3,'1'),(163,114,20,2,'1'),(164,132,1,3,'1'),(165,126,50,4,'1'),(166,126,50,2,'1'),(167,170,45,1,'1'),(168,174,51,2,'1'),(169,147,39,3,'1'),(170,105,2,4,'1'),(171,134,35,3,'1'),(172,138,6,4,'1'),(173,147,42,4,'1'),(174,108,11,4,'1'),(175,134,37,2,'1'),(176,169,66,3,'1'),(177,173,18,4,'1'),(178,105,4,3,'1'),(179,105,4,3,'1'),(180,151,54,4,'1'),(181,120,46,2,'1'),(182,114,49,2,'1'),(183,132,1,2,'1'),(184,138,29,4,'1'),(185,105,2,4,'1'),(186,105,31,2,'1'),(187,105,23,3,'1'),(188,144,36,2,'1'),(189,173,43,3,'1'),(190,170,7,3,'1'),(191,165,62,3,'1'),(192,174,65,3,'1'),(193,141,15,3,'1'),(194,138,32,3,'1'),(195,105,4,3,'1'),(196,152,53,4,'1'),(197,105,30,2,'1'),(198,123,40,3,'1'),(199,165,62,4,'1'),(200,231,17,3,'2'),(201,229,8,1,'2'),(202,213,4,3,'2'),(203,235,30,4,'2'),(204,216,15,3,'2'),(205,215,3,3,'2'),(206,264,68,4,'2'),(207,225,47,3,'2'),(208,202,1,4,'2'),(209,231,17,4,'2'),(210,243,49,4,'2'),(211,240,28,3,'2'),(212,264,68,2,'2'),(213,225,7,4,'2'),(214,215,27,3,'2'),(215,231,6,4,'2'),(216,240,64,4,'2'),(217,240,28,4,'2'),(218,259,59,4,'2'),(219,202,11,3,'2'),(220,210,19,3,'2'),(221,264,68,3,'2'),(222,213,2,2,'2'),(223,275,51,3,'2'),(224,213,30,3,'2'),(225,259,52,3,'2'),(226,264,68,4,'2'),(227,216,17,4,'2'),(228,215,12,3,'2'),(229,257,61,3,'2'),(230,240,28,3,'2'),(231,249,26,1,'2'),(232,216,6,3,'2'),(233,243,10,3,'2'),(234,268,33,2,'2'),(235,235,23,3,'2'),(236,204,36,4,'2'),(237,254,53,2,'2'),(238,213,2,3,'2'),(239,253,55,3,'2'),(240,253,57,3,'2'),(241,262,63,3,'2'),(242,253,57,3,'2'),(243,240,19,3,'2'),(244,262,63,3,'2'),(245,228,42,2,'2'),(246,213,23,3,'2'),(247,213,31,3,'2'),(248,213,21,3,'2'),(249,257,58,3,'2'),(250,213,30,2,'2'),(251,243,33,3,'2'),(252,275,51,3,'2'),(253,275,18,2,'2'),(254,215,3,2,'2'),(255,259,58,1,'2'),(256,235,30,1,'2'),(257,254,54,3,'2'),(258,262,62,2,'2'),(259,249,26,5,'2'),(260,257,60,3,'2'),(261,259,59,3,'2'),(262,235,30,3,'2'),(263,268,10,3,'2'),(264,225,45,4,'2'),(265,225,24,2,'2'),(266,225,22,3,'2'),(267,257,59,3,'2'),(268,216,32,3,'2'),(269,213,23,4,'2'),(270,246,47,3,'2'),(271,262,68,3,'2'),(272,249,12,3,'2'),(273,222,38,3,'2'),(274,268,66,3,'2'),(275,222,13,4,'2'),(276,222,13,3,'2'),(277,235,21,3,'2'),(278,268,33,3,'2'),(279,264,62,4,'2'),(280,204,35,3,'2'),(281,222,37,2,'2'),(282,240,28,4,'2'),(283,216,32,2,'2'),(284,231,6,4,'2'),(285,266,65,4,'2'),(286,268,33,3,'2'),(287,225,22,2,'2'),(288,216,6,4,'2'),(289,249,27,3,'2'),(290,262,63,2,'2'),(291,243,49,4,'2'),(292,210,9,4,'2'),(293,275,18,3,'2'),(294,228,40,2,'2'),(295,254,55,3,'2'),(296,253,53,5,'2'),(297,202,1,3,'2'),(298,243,20,3,'2'),(299,262,67,4,'2');
 /*!40000 ALTER TABLE `assignment` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `assignment_rating`
+--
+
+DROP TABLE IF EXISTS `assignment_rating`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `assignment_rating` (
+  `judge_id` int NOT NULL,
+  `chef_id` int NOT NULL,
+  `assignment_id` int NOT NULL,
+  `rating` int DEFAULT NULL,
+  KEY `judge_id` (`judge_id`),
+  KEY `assignment_id` (`assignment_id`),
+  CONSTRAINT `fk_assignment` FOREIGN KEY (`assignment_id`) REFERENCES `assignment` (`assignment_id`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `fk_assignment_judge` FOREIGN KEY (`judge_id`) REFERENCES `judge` (`judge_id`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `assignment_rating`
@@ -36,6 +79,37 @@ INSERT INTO `assignment_rating` VALUES (1500,109,100,2),(1260,109,100,1),(1340,1
 UNLOCK TABLES;
 
 --
+-- Table structure for table `chef`
+--
+
+DROP TABLE IF EXISTS `chef`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `chef` (
+  `chef_id` int NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `last_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `date_of_birth` date NOT NULL,
+  `age` int NOT NULL,
+  `image` blob,
+  `image_desc` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `experience` int NOT NULL,
+  `title` enum('C cook','B cook','A cook','sous chef','chef') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `year` int NOT NULL,
+  `ethnicity` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `expertise_level` int DEFAULT NULL,
+  PRIMARY KEY (`chef_id`),
+  KEY `fk_chef_ethinicity` (`ethnicity`),
+  KEY `idx_first_name` (`first_name`),
+  KEY `idx_last_name` (`last_name`),
+  CONSTRAINT `fk_chef_ethnicity` FOREIGN KEY (`ethnicity`) REFERENCES `ethnicity` (`name`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `chef_chk_1` CHECK ((`experience` >= 0)),
+  CONSTRAINT `chef_chk_2` CHECK ((`expertise_level` between 1 and 5))
+) ENGINE=InnoDB AUTO_INCREMENT=379 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `chef`
 --
 
@@ -44,6 +118,67 @@ LOCK TABLES `chef` WRITE;
 INSERT INTO `chef` VALUES (105,'Eirinis','Stroubakos','306940000004','2003-11-16',21,NULL,NULL,9,'C cook',1,'french',1),(108,'Anastasis','Board','306940000007','2000-08-14',24,NULL,NULL,8,'A cook',1,'greek',3),(109,'Vicky','Polyplaces','306940000008','2001-05-10',23,NULL,NULL,5,'chef',1,'italian',5),(114,'Foteini','Sergi','306940000013','1998-07-29',26,NULL,NULL,6,'B cook',1,'spanish',2),(120,'Leonardo','Robbie','306940000019','2002-11-11',22,NULL,NULL,7,'C cook',1,'mexican',1),(123,'Martin','Tarantino','306940000022','2004-04-15',20,NULL,NULL,15,'A cook',1,'japanese',3),(126,'Ron','Potter','306940000025','1988-08-24',36,NULL,NULL,14,'chef',1,'english',5),(127,'Adam','Ford','306940000026','1995-12-19',29,NULL,NULL,11,'sous chef',1,'italian',4),(132,'Freddie','Bowie','306940000031','1996-09-05',28,NULL,NULL,7,'sous chef',1,'greek',4),(134,'Alfredo','Deniro','306940000033','2000-04-25',24,NULL,NULL,11,'B cook',1,'chinese',2),(138,'Mia','Keaton','306940000037','1985-02-09',39,NULL,NULL,13,'A cook',1,'american',3),(141,'Susan','Lawrence','306940000040','2002-10-04',22,NULL,NULL,14,'chef',1,'american',5),(144,'Ryan','Nicholson','306940000043','1980-11-12',44,NULL,NULL,8,'B cook',1,'chinese',2),(147,'Kevin','Johansson','306940000046','1989-07-26',35,NULL,NULL,11,'sous chef',1,'japanese',4),(150,'John','Sellers','306940000049','1989-10-27',35,NULL,NULL,8,'C cook',1,'english',1),(151,'Socrates','Papakon','306940000050','1977-09-29',47,NULL,NULL,14,'chef',1,'turkish',5),(152,'Thanasis','Malamas','306940000051','1999-04-26',25,NULL,NULL,15,'B cook',1,'turkish',2),(155,'Alkinoos','Papazoglou','306940000054','2003-09-19',21,NULL,NULL,6,'C cook',1,'cypriot',1),(160,'Anna','Alexiou','306940000059','2002-12-20',22,NULL,NULL,13,'C cook',1,'cypriot',1),(161,'Anthony','Cobain','306940000060','1992-11-01',32,NULL,NULL,5,'sous chef',1,'portugal',4),(165,'Pavlos','Ironbird','306940000064','1990-12-06',34,NULL,NULL,14,'B cook',1,'portugal',2),(167,'Jean','Dupont','330100000000','1975-12-20',49,NULL,NULL,10,'A cook',1,'french',3),(169,'Miguel','Lopez','349110000001','1991-05-03',33,NULL,NULL,9,'chef',1,'spanish',5),(170,'Luis','Hernandez','525510000000','1978-07-30',46,NULL,NULL,15,'chef',1,'mexican',5),(173,'Wei','Lim','6590123456','1995-08-15',29,NULL,NULL,8,'A cook',1,'singaporean',3),(174,'Jia','Yong','6590123457','1990-11-27',34,NULL,NULL,11,'C cook',1,'singaporean',1),(202,'Kiriaki','Frago','306940000001','2003-06-23',21,NULL,NULL,8,'sous chef',2,'greek',4),(204,'Anna','Oiko','306940000003','2003-04-01',21,NULL,NULL,9,'B cook',2,'chinese',2),(210,'Stefanos','Timeos','306940000009','1996-04-16',28,NULL,NULL,11,'C cook',2,'english',1),(213,'Olga','Jones','306940000012','1993-10-16',31,NULL,NULL,10,'A cook',2,'french',3),(215,'Elli','Smith','306940000014','2003-05-28',21,NULL,NULL,9,'C cook',2,'italian',1),(216,'Athanasia','Jolie','306940000015','1990-09-24',34,NULL,NULL,13,'chef',2,'american',5),(222,'Quentin','Scorcese','306940000021','1998-03-27',26,NULL,NULL,8,'sous chef',2,'chinese',4),(225,'Brad','Watson','306940000024','1973-12-18',51,NULL,NULL,12,'C cook',2,'mexican',1),(228,'Harrison','Driver','306940000027','1992-07-13',32,NULL,NULL,9,'A cook',2,'japanese',3),(229,'Anne','Streep','306940000028','1982-11-12',42,NULL,NULL,13,'B cook',2,'greek',2),(231,'David','Mercury','306940000030','1997-01-08',27,NULL,NULL,10,'chef',2,'american',5),(235,'Marlon','Duvall','306940000034','1974-04-03',50,NULL,NULL,9,'C cook',2,'french',1),(237,'Diane','Farrow','306940000036','2003-02-05',21,NULL,NULL,8,'sous chef',2,'japanese',4),(240,'Courteney','Perry','306940000039','1994-06-15',30,NULL,NULL,7,'C cook',2,'english',1),(243,'Jack','Gosling','306940000042','1977-04-22',47,NULL,NULL,12,'A cook',2,'spanish',3),(246,'Javier','Cruz','306940000045','1999-03-01',25,NULL,NULL,13,'chef',2,'mexican',5),(249,'Peter','Cleese','306940000048','1975-09-08',49,NULL,NULL,9,'B cook',2,'italian',2),(253,'John','Pavlidis','306940000052','1989-10-30',35,NULL,NULL,9,'C cook',2,'turkish',1),(254,'Pavlos','Angelakas','306940000053','1984-10-13',40,NULL,NULL,7,'sous chef',2,'turkish',4),(257,'Miltos','Kotsiras','306940000056','1975-07-31',49,NULL,NULL,4,'chef',2,'cypriot',5),(259,'Xaris','Vissi','306940000058','2000-12-27',24,NULL,NULL,10,'sous chef',2,'cypriot',4),(262,'Kurt','Kiedis','306940000061','1977-02-20',47,NULL,NULL,10,'C cook',2,'portugal',1),(264,'Lefteris','Rouvas','306940000063','1994-03-27',30,NULL,NULL,5,'A cook',2,'portugal',3),(266,'Pedro','Rodriguez','351910000001','1989-09-18',35,NULL,NULL,8,'A cook',2,'singaporean',3),(268,'Manuel','Garcia','349110000000','1986-02-14',38,NULL,NULL,7,'B cook',2,'spanish',2),(275,'Li','Chen','6590123458','1988-03-10',36,NULL,NULL,10,'chef',2,'singaporean',5),(301,'Jamie','Oliver','306940000000','2000-09-09',24,NULL,NULL,10,'chef',3,'american',5),(303,'Haris','Papado','306940000002','2002-04-08',22,NULL,NULL,12,'A cook',3,'spanish',3),(306,'George','Striftis','306940000005','2002-04-28',22,NULL,NULL,12,'chef',3,'mexican',5),(307,'Dimitra','Angel','306940000006','2002-06-06',22,NULL,NULL,9,'sous chef',3,'japanese',4),(311,'Kostas','Samlis','306940000010','1998-10-10',26,NULL,NULL,7,'chef',3,'japanese',5),(312,'Dionysis','Allen','306940000011','1988-03-26',36,NULL,NULL,14,'sous chef',3,'greek',4),(317,'Emma','Dafoe','306940000016','1988-07-22',36,NULL,NULL,15,'sous chef',3,'greek',4),(318,'Willem','Stone','306940000017','1988-11-06',36,NULL,NULL,11,'A cook',3,'english',3),(319,'Woody','Marx','306940000018','1974-11-30',50,NULL,NULL,9,'B cook',3,'chinese',2),(321,'Margot','Dicaprio','306940000020','1990-07-02',34,NULL,NULL,12,'chef',3,'french',5),(324,'Emma','Pitt','306940000023','2003-07-30',21,NULL,NULL,10,'B cook',3,'chinese',2),(330,'Meryl','Hathaway','306940000029','2004-06-22',20,NULL,NULL,8,'C cook',3,'american',1),(333,'Robert','Pacino','306940000032','1973-08-17',51,NULL,NULL,15,'A cook',3,'spanish',3),(336,'Robert','Brando','306940000035','2001-01-05',23,NULL,NULL,12,'chef',3,'mexican',5),(339,'Matthew','Cox','306940000038','1979-08-19',45,NULL,NULL,10,'B cook',3,'italian',2),(342,'Jennifer','Sarandon','306940000041','1990-08-15',34,NULL,NULL,9,'sous chef',3,'italian',4),(345,'Penelope','Bardem','306940000044','2004-04-28',20,NULL,NULL,10,'C cook',3,'french',1),(348,'Scarlett','Spacey','306940000047','1984-11-22',40,NULL,NULL,15,'A cook',3,'english',3),(356,'Nick','Johnidis','306940000055','1988-03-20',36,NULL,NULL,9,'sous chef',3,'turkish',4),(358,'Johnny','Pascha','306940000057','1983-10-05',41,NULL,NULL,8,'B cook',3,'cypriot',2),(363,'Sakis','Pantazis','306940000062','1972-01-05',52,NULL,NULL,9,'chef',3,'portugal',5),(371,'Aylin','Yılmaz','905310000000','1994-10-22',30,NULL,NULL,10,'A cook',3,'turkish',3),(372,'Nicos','Georgiou','357220000000','1980-04-17',44,NULL,NULL,11,'sous chef',3,'cypriot',4),(376,'Carlos','Silva','351910000000','1983-06-05',41,NULL,NULL,7,'B cook',3,'portugal',2),(377,'Siew','Heng','6590123459','1992-05-20',32,NULL,NULL,12,'B cook',3,'Singaporean',2),(378,'Liang','Tang','6590123460','1987-11-12',37,NULL,NULL,9,'A cook',3,'Singaporean',3);
 /*!40000 ALTER TABLE `chef` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`harris`@`localhost`*/ /*!50003 TRIGGER `calculate_age` BEFORE INSERT ON `chef` FOR EACH ROW BEGIN
+    DECLARE current_year INT;
+    DECLARE birth_year INT;
+    
+    SET current_year = YEAR(CURDATE());
+    SET birth_year = YEAR(NEW.date_of_birth);
+    
+    SET NEW.age = current_year - birth_year;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+
+--
+-- Temporary view structure for view `chef_view`
+--
+
+DROP TABLE IF EXISTS `chef_view`;
+/*!50001 DROP VIEW IF EXISTS `chef_view`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `chef_view` AS SELECT 
+ 1 AS `chef_id`,
+ 1 AS `first_name`,
+ 1 AS `last_name`,
+ 1 AS `phone`,
+ 1 AS `date_of_birth`,
+ 1 AS `age`,
+ 1 AS `image`,
+ 1 AS `image_desc`,
+ 1 AS `experience`,
+ 1 AS `title`,
+ 1 AS `year`,
+ 1 AS `ethnicity`,
+ 1 AS `expertise_level`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Table structure for table `episode`
+--
+
+DROP TABLE IF EXISTS `episode`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `episode` (
+  `episode_id` int NOT NULL AUTO_INCREMENT,
+  `year` int NOT NULL,
+  PRIMARY KEY (`episode_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=311 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `episode`
@@ -56,6 +191,25 @@ INSERT INTO `episode` VALUES (101,1),(102,1),(103,1),(104,1),(105,1),(106,1),(10
 UNLOCK TABLES;
 
 --
+-- Table structure for table `episode_assignment`
+--
+
+DROP TABLE IF EXISTS `episode_assignment`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `episode_assignment` (
+  `episode_id` int NOT NULL,
+  `assignment_id` int NOT NULL,
+  UNIQUE KEY `assignment_id_UNIQUE` (`assignment_id`),
+  KEY `fk_episode_assignment_episode_id_idx` (`episode_id`),
+  KEY `fk_episode_assignment_assignment_id_idx` (`assignment_id`),
+  KEY `idx_episode_assignment_id` (`assignment_id`),
+  CONSTRAINT `fk_episode_assignment_assignment_id` FOREIGN KEY (`assignment_id`) REFERENCES `assignment` (`assignment_id`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `fk_episode_assignment_episode_id` FOREIGN KEY (`episode_id`) REFERENCES `episode` (`episode_id`) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `episode_assignment`
 --
 
@@ -64,6 +218,23 @@ LOCK TABLES `episode_assignment` WRITE;
 INSERT INTO `episode_assignment` VALUES (101,100),(101,104),(101,114),(101,133),(101,148),(101,157),(101,164),(101,173),(101,193),(101,196),(102,120),(102,123),(102,125),(102,127),(102,145),(102,150),(102,158),(102,162),(102,163),(102,175),(103,112),(103,118),(103,128),(103,134),(103,137),(103,142),(103,172),(103,188),(103,190),(103,197),(104,103),(104,117),(104,122),(104,139),(104,152),(104,160),(104,168),(104,169),(104,178),(104,195),(105,106),(105,109),(105,116),(105,136),(105,140),(105,141),(105,177),(105,187),(105,192),(105,194),(106,105),(106,108),(106,124),(106,144),(106,149),(106,153),(106,154),(106,161),(106,184),(106,199),(107,107),(107,113),(107,115),(107,151),(107,155),(107,165),(107,171),(107,174),(107,186),(107,189),(108,102),(108,110),(108,135),(108,143),(108,146),(108,167),(108,170),(108,181),(108,182),(108,191),(109,111),(109,129),(109,130),(109,131),(109,132),(109,138),(109,166),(109,176),(109,179),(109,198),(110,101),(110,119),(110,121),(110,126),(110,147),(110,156),(110,159),(110,180),(110,183),(110,185),(201,218),(201,231),(201,237),(201,242),(201,250),(201,258),(201,261),(201,277),(201,296),(201,299),(202,205),(202,210),(202,224),(202,225),(202,230),(202,244),(202,246),(202,252),(202,270),(202,272),(203,201),(203,202),(203,206),(203,207),(203,212),(203,234),(203,251),(203,263),(203,281),(203,285),(204,204),(204,216),(204,238),(204,241),(204,247),(204,264),(204,271),(204,280),(204,289),(204,293),(205,240),(205,257),(205,274),(205,275),(205,276),(205,282),(205,286),(205,287),(205,288),(205,294),(206,208),(206,214),(206,222),(206,227),(206,228),(206,239),(206,259),(206,266),(206,269),(206,283),(207,203),(207,220),(207,235),(207,243),(207,245),(207,248),(207,255),(207,262),(207,267),(207,290),(208,217),(208,221),(208,236),(208,249),(208,260),(208,265),(208,268),(208,279),(208,297),(208,298),(209,211),(209,219),(209,223),(209,229),(209,253),(209,254),(209,273),(209,278),(209,292),(209,295),(210,200),(210,209),(210,213),(210,215),(210,226),(210,232),(210,233),(210,256),(210,284),(210,291);
 /*!40000 ALTER TABLE `episode_assignment` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `episode_judge`
+--
+
+DROP TABLE IF EXISTS `episode_judge`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `episode_judge` (
+  `episode_id` int NOT NULL,
+  `judge_id` int NOT NULL,
+  KEY `fk_episode_judge_judge_id_idx` (`judge_id`),
+  KEY `fk_episode_judge_episode_id_idx` (`episode_id`),
+  CONSTRAINT `fk_episode_judge_episode_id` FOREIGN KEY (`episode_id`) REFERENCES `episode` (`episode_id`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `fk_episode_judge_judge_id` FOREIGN KEY (`judge_id`) REFERENCES `judge` (`judge_id`) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `episode_judge`
@@ -76,6 +247,22 @@ INSERT INTO `episode_judge` VALUES (101,1500),(101,1260),(101,1340),(102,1700),(
 UNLOCK TABLES;
 
 --
+-- Table structure for table `equipment`
+--
+
+DROP TABLE IF EXISTS `equipment`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `equipment` (
+  `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `instructions` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `img` blob,
+  `img_descr` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  PRIMARY KEY (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `equipment`
 --
 
@@ -84,6 +271,21 @@ LOCK TABLES `equipment` WRITE;
 INSERT INTO `equipment` VALUES ('baking dish','bake but deep',NULL,NULL),('baking pan','bakes things',NULL,NULL),('baking sheet','bake',NULL,NULL),('baking tray','bake',NULL,NULL),('big bowl','put many things inside',NULL,NULL),('blender','blend',NULL,NULL),('board','chopping',NULL,NULL),('bowl','put things inside',NULL,NULL),('brush','brushes things',NULL,NULL),('casserole pan','casserole things',NULL,NULL),('cookie ring','to shape cookies and other food',NULL,NULL),('cutting board','cut things',NULL,NULL),('drainer','drain',NULL,NULL),('food processor','turn things into cream',NULL,NULL),('frying pan','fry things',NULL,NULL),('grater','grate',NULL,NULL),('mixer','mixes things',NULL,NULL),('muffin cup','to make muffins',NULL,NULL),('muffin pan','to cook muffins or tortillas on the crevishes',NULL,NULL),('palette knife','smooth things',NULL,NULL),('pan','things',NULL,NULL),('peeler','peel',NULL,NULL),('plastic wrap','wrap',NULL,NULL),('pot','things again',NULL,NULL),('potato masher','mashes things like potatoes',NULL,NULL),('roasting tray','roast',NULL,NULL),('rolling pin','rolls things',NULL,NULL),('scale','weigh',NULL,NULL),('shredes things','shredes things',NULL,NULL),('sieve','to make things \"finer\"',NULL,NULL),('skillet pan','skill things',NULL,NULL),('small bowl','put some things inside',NULL,NULL),('spatula','spread',NULL,NULL),('steamer','steams things',NULL,NULL),('towel','many uses like absorbs moisture',NULL,NULL),('tray','put things',NULL,NULL),('whisk','stir mixtures',NULL,NULL),('wok','cooks things',NULL,NULL),('wooden skewers','pierce things',NULL,NULL),('wooden spoon','stir',NULL,NULL);
 /*!40000 ALTER TABLE `equipment` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `ethnicity`
+--
+
+DROP TABLE IF EXISTS `ethnicity`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ethnicity` (
+  `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `img` blob,
+  `img_descr` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  PRIMARY KEY (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `ethnicity`
@@ -96,6 +298,23 @@ INSERT INTO `ethnicity` VALUES ('american',NULL,NULL),('chinese',NULL,NULL),('cy
 UNLOCK TABLES;
 
 --
+-- Table structure for table `food_group`
+--
+
+DROP TABLE IF EXISTS `food_group`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `food_group` (
+  `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `category` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `img` blob,
+  `img_descr` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  PRIMARY KEY (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `food_group`
 --
 
@@ -104,6 +323,32 @@ LOCK TABLES `food_group` WRITE;
 INSERT INTO `food_group` VALUES ('aromatic substances and essential oils','This category includes substances and essential oils known for their distinct fragrances and often used in aromatherapy or for adding aroma to various products.','aromatic',NULL,NULL),('cereal and their products','Cereal and cereal-based products, such as bread, pasta, rice, and breakfast cereals, are included in this category.','cereal',NULL,NULL),('coffee, tea and other products','Products in this category contain caffeine, a natural stimulant found in items like coffee, tea, and other caffeinated beverages or foods.','caffeinated',NULL,NULL),('fats and oils','Fats and oils, both natural and processed, are grouped in this category, including cooking oils, butter, margarine, and other oily substances.','oily',NULL,NULL),('fish and their products','Products in this category include various types of fish and seafood, either fresh, frozen, or preserved.','fish',NULL,NULL),('meat and their products','This category encompasses various types of meat and meat products derived from animals like beef, pork, poultry, and game.','meat',NULL,NULL),('milk, eggs and their products','Milk, eggs, cheese, yogurt, and other products derived from animals like cows, goats, and sheep are classified under dairy.','dairy',NULL,NULL),('preserved foods','Preserved foods that have been frozen to extend their shelf life fall into this category, ranging from fruits and vegetables to ready-to-eat meals.','frozen',NULL,NULL),('products with sweeteners','This category includes a wide range of beverages, such as water, juices, sodas, energy drinks, and alcoholic beverages.','sweet',NULL,NULL),('sweeteners','Sweeteners such as sugar, honey, and artificial sweeteners are categorized here, adding sweetness to foods and beverages.','sweet',NULL,NULL),('various beverages','Beverages of various kinds, including alcoholic and non-alcoholic options.','drink',NULL,NULL),('various plant based foods','Various plant-based foods, including fruits, vegetables, legumes, nuts, seeds, and meat substitutes like tofu, fall into this category.','vegetarian',NULL,NULL);
 /*!40000 ALTER TABLE `food_group` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `ingredient`
+--
+
+DROP TABLE IF EXISTS `ingredient`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ingredient` (
+  `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `calories` int NOT NULL,
+  `protein` int NOT NULL,
+  `carbs` int NOT NULL,
+  `fats` int NOT NULL,
+  `img` blob,
+  `img_descr` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `food_group_name` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`name`),
+  KEY `fk_ingredient_food_group` (`food_group_name`),
+  CONSTRAINT `fk_ingredient_food_group` FOREIGN KEY (`food_group_name`) REFERENCES `food_group` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `ingredient_chk_2` CHECK ((`calories` >= 0)),
+  CONSTRAINT `ingredient_chk_3` CHECK ((`protein` >= 0)),
+  CONSTRAINT `ingredient_chk_4` CHECK ((`carbs` >= 0)),
+  CONSTRAINT `ingredient_chk_5` CHECK ((`fats` >= 0))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `ingredient`
@@ -116,6 +361,22 @@ INSERT INTO `ingredient` VALUES ('aduki beans',120,8,23,1,NULL,NULL,'various pla
 UNLOCK TABLES;
 
 --
+-- Table structure for table `judge`
+--
+
+DROP TABLE IF EXISTS `judge`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `judge` (
+  `judge_id` int NOT NULL AUTO_INCREMENT,
+  `chef_id` int DEFAULT NULL,
+  PRIMARY KEY (`judge_id`),
+  KEY `chef_id` (`chef_id`),
+  CONSTRAINT `fk_judge_chefid` FOREIGN KEY (`chef_id`) REFERENCES `chef` (`chef_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE=InnoDB AUTO_INCREMENT=3781 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `judge`
 --
 
@@ -124,6 +385,21 @@ LOCK TABLES `judge` WRITE;
 INSERT INTO `judge` VALUES (1050,105),(1080,108),(1090,109),(1140,114),(1200,120),(1230,123),(1260,126),(1270,127),(1320,132),(1340,134),(1380,138),(1410,141),(1440,144),(1470,147),(1500,150),(1510,151),(1520,152),(1550,155),(1600,160),(1610,161),(1650,165),(1670,167),(1690,169),(1700,170),(1730,173),(1740,174),(2020,202),(2040,204),(2100,210),(2130,213),(2150,215),(2160,216),(2220,222),(2250,225),(2280,228),(2290,229),(2310,231),(2350,235),(2370,237),(2400,240),(2430,243),(2460,246),(2490,249),(2530,253),(2540,254),(2570,257),(2590,259),(2620,262),(2640,264),(2660,266),(2680,268),(2750,275),(3010,301),(3030,303),(3060,306),(3070,307),(3110,311),(3120,312),(3170,317),(3180,318),(3190,319),(3210,321),(3240,324),(3300,330),(3330,333),(3360,336),(3390,339),(3420,342),(3450,345),(3480,348),(3560,356),(3580,358),(3630,363),(3710,371),(3720,372),(3760,376),(3770,377),(3780,378);
 /*!40000 ALTER TABLE `judge` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `meals`
+--
+
+DROP TABLE IF EXISTS `meals`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `meals` (
+  `meal` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `img` blob,
+  `img_descr` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  PRIMARY KEY (`meal`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `meals`
@@ -136,6 +412,30 @@ INSERT INTO `meals` VALUES ('breakfast',NULL,NULL),('brunch',NULL,NULL),('dinner
 UNLOCK TABLES;
 
 --
+-- Table structure for table `nutritional_information`
+--
+
+DROP TABLE IF EXISTS `nutritional_information`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `nutritional_information` (
+  `recipe_id` int NOT NULL,
+  `calories` int NOT NULL,
+  `fats` int NOT NULL,
+  `protein` int NOT NULL,
+  `carbs` int NOT NULL,
+  `img` blob,
+  `img_descr` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  KEY `recipe_id` (`recipe_id`),
+  CONSTRAINT `fk_nutr_info_recipe` FOREIGN KEY (`recipe_id`) REFERENCES `recipe` (`recipe_id`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `nutritional_information_chk_1` CHECK ((`calories` >= 0)),
+  CONSTRAINT `nutritional_information_chk_2` CHECK ((`fats` >= 0)),
+  CONSTRAINT `nutritional_information_chk_3` CHECK ((`protein` >= 0)),
+  CONSTRAINT `nutritional_information_chk_4` CHECK ((`carbs` >= 0))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `nutritional_information`
 --
 
@@ -144,6 +444,45 @@ LOCK TABLES `nutritional_information` WRITE;
 INSERT INTO `nutritional_information` VALUES (1,1063,82,35,55,NULL,NULL),(2,1220,27,42,202,NULL,NULL),(5,4923,177,322,500,NULL,NULL),(3,398,19,30,30,NULL,NULL),(4,4626,405,42,137,NULL,NULL),(6,2924,72,143,459,NULL,NULL),(7,1782,95,78,144,NULL,NULL),(8,3565,266,125,185,NULL,NULL),(9,2439,69,210,246,NULL,NULL),(10,1056,46,76,91,NULL,NULL),(11,2274,66,185,238,NULL,NULL),(12,1795,156,53,61,NULL,NULL),(13,2209,73,145,246,NULL,NULL),(14,1658,101,72,115,NULL,NULL),(15,3434,109,137,495,NULL,NULL),(17,2532,116,32,336,NULL,NULL),(16,4791,326,80,395,NULL,NULL),(18,1295,39,50,187,NULL,NULL),(19,686,5,27,141,NULL,NULL),(20,1094,55,18,134,NULL,NULL),(21,609,30,20,40,NULL,NULL),(22,1732,88,106,121,NULL,NULL),(27,5323,66,180,834,NULL,NULL),(25,3644,82,151,570,NULL,NULL),(24,1519,99,45,121,NULL,NULL),(23,1906,86,20,273,NULL,NULL),(28,3015,212,80,212,NULL,NULL),(29,5502,380,72,444,NULL,NULL),(30,5101,433,48,184,NULL,NULL),(31,1939,86,24,266,NULL,NULL),(32,901,20,89,93,NULL,NULL),(33,2869,91,141,390,NULL,NULL),(34,389,14,10,57,NULL,NULL),(35,5172,280,373,161,NULL,NULL),(36,1507,90,92,45,NULL,NULL),(37,5972,449,298,95,NULL,NULL),(38,863,18,79,87,NULL,NULL),(39,3081,101,43,498,NULL,NULL),(40,1878,97,116,140,NULL,NULL),(41,679,35,12,85,NULL,NULL),(42,642,19,21,96,NULL,NULL),(43,2685,74,55,439,NULL,NULL),(44,5917,619,13,97,NULL,NULL),(45,4207,103,110,594,NULL,NULL),(46,1015,43,61,95,NULL,NULL),(47,1584,101,64,114,NULL,NULL),(48,4092,198,148,270,NULL,NULL),(49,9705,1052,33,68,NULL,NULL),(50,2615,125,233,141,NULL,NULL),(51,749,34,44,63,NULL,NULL),(52,8898,712,264,216,NULL,NULL),(53,2901,5,34,327,NULL,NULL),(54,3991,247,51,158,NULL,NULL),(55,3084,192,140,198,NULL,NULL),(61,5092,230,115,607,NULL,NULL),(60,4923,205,103,673,NULL,NULL),(58,4569,274,78,213,NULL,NULL),(59,5778,265,91,792,NULL,NULL),(56,2669,147,59,151,NULL,NULL),(57,3939,135,51,317,NULL,NULL),(62,1574,88,53,140,NULL,NULL),(63,1684,78,130,126,NULL,NULL),(64,3408,186,138,289,NULL,NULL),(65,1306,32,114,139,NULL,NULL),(66,1093,38,28,154,NULL,NULL),(67,727,10,72,86,NULL,NULL),(68,3971,69,513,354,NULL,NULL),(69,1800,126,91,73,NULL,NULL);
 /*!40000 ALTER TABLE `nutritional_information` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `recipe`
+--
+
+DROP TABLE IF EXISTS `recipe`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `recipe` (
+  `recipe_id` int NOT NULL,
+  `name` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `sweet` tinyint(1) NOT NULL,
+  `ethnicity` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `difficulty` int NOT NULL,
+  `brief` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `number_steps` int NOT NULL,
+  `main_ingredient` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `img_descr` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `theme_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `portions` int NOT NULL,
+  `tip1` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tip2` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `tip3` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `cooking_time` int NOT NULL,
+  `preparation_time` int NOT NULL,
+  `img_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`recipe_id`),
+  KEY `idx_recipe_main_ingredient` (`main_ingredient`),
+  KEY `idx_recipe_theme_name` (`theme_name`),
+  KEY `fk_ehtnicity_idx` (`ethnicity`),
+  KEY `r_recipe_id_index` (`recipe_id`),
+  CONSTRAINT `fk_recipe_ethnicity` FOREIGN KEY (`ethnicity`) REFERENCES `ethnicity` (`name`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `fk_recipe_main_ingredient` FOREIGN KEY (`main_ingredient`) REFERENCES `ingredient` (`name`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `fk_recipe_theme` FOREIGN KEY (`theme_name`) REFERENCES `theme` (`name`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `recipe_chk_1` CHECK (((`difficulty` >= 1) and (`difficulty` <= 5))),
+  CONSTRAINT `recipe_chk_2` CHECK ((`portions` >= 0)),
+  CONSTRAINT `recipe_chk_3` CHECK ((`portions` >= 0))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `recipe`
@@ -156,6 +495,23 @@ INSERT INTO `recipe` VALUES (1,'spinach with eggs',0,'greek',2,'This is a greek-
 UNLOCK TABLES;
 
 --
+-- Table structure for table `recipe_equipment`
+--
+
+DROP TABLE IF EXISTS `recipe_equipment`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `recipe_equipment` (
+  `recipe_id` int NOT NULL,
+  `equipment_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  KEY `recipe_id` (`recipe_id`),
+  KEY `equipment_name` (`equipment_name`),
+  CONSTRAINT `recipe_equipment_ibfk_1` FOREIGN KEY (`recipe_id`) REFERENCES `recipe` (`recipe_id`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `recipe_equipment_ibfk_2` FOREIGN KEY (`equipment_name`) REFERENCES `equipment` (`name`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `recipe_equipment`
 --
 
@@ -166,6 +522,38 @@ INSERT INTO `recipe_equipment` VALUES (1,'bowl'),(1,'frying pan'),(2,'bowl'),(5,
 UNLOCK TABLES;
 
 --
+-- Temporary view structure for view `recipe_equipment_view`
+--
+
+DROP TABLE IF EXISTS `recipe_equipment_view`;
+/*!50001 DROP VIEW IF EXISTS `recipe_equipment_view`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `recipe_equipment_view` AS SELECT 
+ 1 AS `recipe_id`,
+ 1 AS `equipment_name`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Table structure for table `recipe_ingredient`
+--
+
+DROP TABLE IF EXISTS `recipe_ingredient`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `recipe_ingredient` (
+  `recipe_id` int NOT NULL,
+  `ingredient` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `amount` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `grams` int NOT NULL,
+  KEY `recipe_id` (`recipe_id`),
+  KEY `ingredient` (`ingredient`),
+  CONSTRAINT `recipe_ingredient_ibfk_1` FOREIGN KEY (`recipe_id`) REFERENCES `recipe` (`recipe_id`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `recipe_ingredient_ibfk_2` FOREIGN KEY (`ingredient`) REFERENCES `ingredient` (`name`) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `recipe_ingredient`
 --
 
@@ -174,6 +562,101 @@ LOCK TABLES `recipe_ingredient` WRITE;
 INSERT INTO `recipe_ingredient` VALUES (1,'cumin','1/4 teaspoon',1),(1,'egg','4',260),(1,'cumin','1/4 teaspoon',1),(1,'egg','4',260),(1,'clove of garlic','2',10),(1,'olive oil','3 tablespoon',45),(1,'onion','1',150),(1,'parsley','1 teaspoon',2),(1,'pepper','to taste',3),(1,'pul biber','1/2 teaspoon',1),(1,'salt','1/2 teaspoon',3),(1,'smoked paprika','1/2',1),(1,'spinach','400g',400),(1,'sumac','1/2 teaspoon',1),(1,'sweet red pepper','2 tablespoon',30),(1,'tomato','4',480),(1,'unsalted butter','30 g',30),(1,'water','100ml',100),(2,'caster sugar','160g',160),(2,'vanilla','1 pod',2),(2,'milk','600ml',600),(2,'egg','6',390),(5,'chicken thighs','1kg',1000),(5,'onion','200g',200),(5,'plum tomatoes','800g',800),(5,'dried macaroni','600g',600),(5,'halloumi cheese','100g',100),(5,'carrot','100g',100),(5,'celery','200g',200),(3,'basil','1 spring',10),(2,'passion fruit','3',50),(3,'egg','4',260),(3,'cherry tomato','6',720),(3,'mozarella','30g',30),(4,'double cream','300 ml',300),(4,'caster sugar','2 tablespoon',25),(4,'dark chocolate','400 g',400),(4,'unsalted butter','90 g',90),(4,'milk','100 ml',100),(4,'tart shell','1',5),(4,'cocoa powder','a bit',5),(6,'tomato ketchup','75ml',75),(6,'honey','2 tablespoon',50),(6,'worcestershire sauce','1 tablespoon',15),(6,'smoked paprika','1 teaspoon',5),(6,'red wine vinegar','a bit',5),(6,'chicken thighs','6',390),(6,'potato','1.2kg',1200),(6,'olive oil','a bit',5),(6,'corn','750g',750),(6,'green cabbage','250g',250),(6,'carrot','150g',150),(6,'onion','1',150),(6,'yoghurt','100g',100),(7,'duck leg','300g',300),(7,'red onion','2',300),(7,'coriander','15g',15),(7,'clove of garlic','4',20),(7,'tomato','600g',600),(7,'orange','1',5),(7,'chipotle paste','2 tablespoon',25),(7,'red wine vinegar','1 tablespoon',15),(7,'flour tortillas','6',180),(8,'pine nuts','100 g',100),(8,'egg','5',325),(8,'feta cheese','300 g',300),(8,'cheddar cheese','50 g',50),(8,'dried oregano','a bit',5),(8,'lemon','1',150),(8,'olive oil','a bit',5),(8,'unsalted butter','90 g',90),(8,'spinach','400',400),(8,'filo pastry','270 g',270),(8,'nutmeg','1',5),(9,'wholemeal pitta','6',360),(9,'chicken breasts','480g',480),(9,'basil','30g',30),(9,'egg','1',65),(9,'clove of garlic','2',10),(9,'parmesan cheese','20g',20),(9,'lemon','1',150),(9,'yoghurt','4 tablespoon',60),(9,'avocado','1',200),(9,'chipotle tabasco sauce','a little',5),(9,'extra virgin olive oil','a bit',5),(9,'gem lettuces','2',100),(9,'cherry tomato','320g',320),(10,'trout fillets','260g',260),(10,'watercress','100g',100),(10,'lemon','1',150),(10,'extra virgin olive oil','a little',5),(10,'yoghurt','3 tablespoon',45),(10,'cucumber','1/4',50),(10,'onion','1',150),(10,'avocado','1/2',100),(10,'bread','2 slices',100),(11,'olive oil','a bit',5),(11,'clove of garlic','1',5),(11,'lemon','2',300),(11,'rosemary','2 sprigs',5),(11,'red pepper','1',150),(11,'white fish fillet','520g',520),(11,'wholemeal bread','200g',200),(11,'smoked pancetta','8 rashers',160),(11,'cooked puy lentils','500g',500),(11,'spinach','160g',160),(11,'yoghurt','4 tablespoon',60),(12,'lemon','1',150),(12,'cherry tomato','400 g',400),(12,'pistachio','80 g',80),(12,'clove of garlic','2',10),(12,'mint','4 springs',20),(12,'parsley','4 springs',20),(12,'red chilli','a bit',5),(12,'pecorino cheese','20 g',20),(12,'burrata','3',450),(13,'steak','250 g',250),(13,'clove of garlic','2',10),(13,'ginger','a bit',5),(13,'red chilli','2',10),(13,'spring onion','1',50),(13,'carrot','2',200),(13,'radish','250 g',250),(13,'szechuan peppercorns','1 teaspoon',5),(13,'groundnut oil','1 tablespoon',15),(13,'chilli bean paste','2 tablespoon',30),(13,'vegetable stock','1 litre',1000),(13,'aduki beans','400 g',400),(13,'rice','250g',250),(13,'cornflour','1 tablespoon',15),(13,'broccoli','200 g',200),(13,'tofu','350 g',350),(14,'parmesan cheese','50g',50),(14,'cheddar cheese','100g',100),(14,'unsalted butter','50g',50),(14,'flour','100g',100),(14,'semolina','50g',50),(14,'egg','3',195),(15,'dried yeast','7g',7),(15,'strong bread flour','550g',550),(15,'olive oil','a bit',5),(15,'onion','1',150),(15,'unsalted butter','50g',50),(15,'bay leaves','4',20),(15,'english mustard','2 teaspoon',10),(15,'semi-skimmed milk','700ml',700),(15,'cauliflower','600g',600),(15,'cheddar cheese','120g',120),(17,'unsalted butter','100 g',100),(17,'caster sugar','125 g',125),(17,'egg','1',65),(17,'vanilla extract','½ teaspoon',2),(17,'flour','200g',200),(17,'sea salt','1 pinch',1),(17,'chocolate','100 g',100),(16,'dark chocolate','200g',200),(16,'unsalted butter','175g',175),(16,'brown sugar','120g',120),(16,'almonds','100g',100),(16,'cocoa powder','2 tablespoon',30),(18,'tomato ketchup','4 tablespoon',60),(18,'sweet chilli sauce','2 tablespoon',30),(18,'light soy sauce','1 tablespoon',15),(18,'sesame oil','1 teaspoon',5),(18,'rice','2 cups',390),(19,'red onion','2',300),(19,'clove of garlic','4',20),(19,'aubergine','2',400),(19,'courgette','3',300),(19,'red pepper','3',300),(19,'tomato','6',900),(19,'basil','15 g',15),(19,'olive oil','a bit',5),(19,'thyme','2 sprigs',5),(19,'cherry tomato','400 g',400),(19,'balsamic vinegar','1 tablespoon',15),(19,'lemon','0,5',75),(20,'rice','360g',360),(20,'olive oil','2 tablespoon',30),(20,'unsalted butter','2 tablespoon',30),(20,'onion','1',150),(20,'chopped tomato','400g',400),(20,'paprika','1 teaspoon',5),(20,'sea salt','to taste',5),(21,'mushroom','400g',400),(21,'onion','1',150),(21,'clove of garlic','2',10),(21,'pickled onion','4',100),(21,'cornichons','2',50),(21,'parsley','4 sprigs',20),(21,'olive oil','a bit',5),(21,'baby capers','1 tablespoon',15),(21,'whisky','50ml',50),(21,'smoked paprika','a bit',5),(21,'crème fraîche','80g',80),(18,'clove of garlic','3',15),(18,'red chilli','2',10),(18,'tomato','1',150),(18,'water','200ml',200),(18,'broccoli','150g',150),(18,'egg','1',65),(18,'olive oil','a bit',5),(18,'tofu','200g',200),(18,'onion','1',150),(18,'grated ginger','1 tablespoon',15),(16,'egg','4',260),(16,'flour','150g',150),(16,'fudge','100g',100),(16,'ice cream','1 scoop',50),(18,'cashew nut','40g',40),(22,'steak','300g',300),(22,'potato','300g',300),(22,'red chilli','3',45),(22,'olive oil','a little',5),(22,'coriander','15g',15),(22,'mint','15g',15),(22,'clove of garlic','3/2',8),(22,'red chilli','1',10),(22,'onion','2',300),(27,'red wine','1 bottle',750),(27,'pancetta','50g',50),(27,'olive oil','a bit',5),(27,'passata','700 g',700),(27,'beef stock','2 litres',2000),(27,'parmesan cheese','a bit',50),(27,'egg','4',260),(27,'flour','1kg',1000),(22,'tomato','1',150),(22,'lime','2',100),(22,'peanuts','50g',50),(22,'sesame seeds','25g',25),(22,'cumin','1/2 tablespoon',5),(22,'oregano','1/2 teaspoon',2),(25,'plum tomatoes','1200g',1200),(25,'egg','3',195),(25,'yoghurt','500g',500),(25,'feta cheese','100g',100),(25,'oregano','20g',20),(25,'filo pastry','270g',270),(25,'basmati rice','300g',300),(25,'butter beans','400g',400),(25,'olive oil','',5),(25,'ground coriander','3 teaspoon',15),(25,'olive tapenade','3 teaspoon',15),(25,'mixed-colour pepper','3',300),(25,'sweet potatoes','3',600),(25,'portobello mushroom','3',300),(25,'courgette','3',300),(24,'colby cheese','75g',75),(24,'flour tortillas','2',200),(24,'sour cream','a bit',50),(24,'pico de gallo','a bit',50),(24,'guacamole','a bit',50),(24,'lime','a bit',50),(25,'onion','3',450),(25,'clove of garlic','3',15),(23,'ice cream','a bit',50),(24,'olive oil','3 tablespoon',45),(24,'mushroom','200g',200),(24,'chipotle powder','1/2 teaspoon',2),(24,'salt','1/4 teaspoon',1),(24,'black pepper','1/4 teaspoon',1),(23,'apricot jam','200g',200),(23,'apple','4',400),(23,'flaked almonds','1 tablespoon',10),(22,'chipotle chilli','1/2',5),(22,'tequila','1 tablespoon',15),(22,'red chilli','1/2',8),(23,'ready-rolled puff pastry','320g',320),(28,'flour','200g',200),(28,'baking powder','1 teaspoon',5),(28,'english mustard powder','1 teaspoon',5),(28,'cayenne pepper','a bit',5),(28,'unsalted butter','75g',75),(28,'cheddar cheese','120g',120),(28,'chives','20g',20),(28,'milk','70ml',70),(28,'olive oil','a bit',5),(28,'cream cheese','200g',200),(28,'lemon','1',100),(28,'red wine vinegar','a bit',5),(28,'mustard','1 teaspoon',5),(28,'watercress','100g',100),(28,'parsley','15g',15),(28,'red chicory','1',100),(28,'apple','1',100),(28,'celery heart','1',100),(28,'unsalted walnut halves','50g',50),(29,'unsalted butter','200g',200),(29,'hazelnuts','200g',200),(29,'dark chocolate','200g',200),(29,'flour','200g',200),(29,'milk','200ml',200),(29,'caster sugar','200g',200),(30,'double cream','300ml',300),(30,'caster sugar','2 tablespoon',30),(30,'dark chocolate','400g',400),(30,'unsalted butter','90g',90),(30,'milk','100ml',100),(30,'tart shell','1',100),(30,'cocoa powder','a bit',5),(31,'apple','100g',100),(31,'flour','200g',200),(31,'unsalted butter','100g',100),(31,'caster sugar','100g',100),(31,'egg','1',60),(32,'wholemeal bread','150g',150),(32,'clove of garlic','1/2',3),(32,'chicken breasts','240g',240),(32,'olive oil','a bit',5),(32,'lemon','1',100),(32,'thyme','15g',15),(32,'runny honey','2 teaspoon',15),(33,'sausage','400g',400),(33,'olive oil','a bit',5),(33,'cinnamon','1/2 stick',2),(33,'rosemary','2 sprigs',10),(33,'cajun seasoning','2 teaspoon',10),(33,'smoked paprika','2 teaspoon',10),(33,'onion','500g',500),(33,'butternut squash','1',1000),(33,'clove of garlic','3',15),(33,'balsamic vinegar','2 tablespoon',30),(33,'butter beans','800g',800),(33,'plum tomatoes','800g',800),(33,'coriander','1 sprig',5),(34,'clove of garlic','1',5),(34,'red chilli','1',10),(34,'spring onion','3',45),(34,'red onion','1',150),(34,'mangetout','1',50),(34,'shiitake mushroom','6',90),(34,'chestnut','6',60),(34,'green cabbage','36g',36),(34,'olive oil','a bit',5),(34,'soy sauce','2 teaspoon',10),(34,'sesame oil','a bit',5),(34,'sesame seeds','a bit',5),(35,'pork','1800g',1800),(35,'olive oil','a bit',5),(35,'chinese five-spice powder','4 tablespoon',60),(36,'caster sugar','1 teaspoon',5),(36,'cornflour','2 teaspoon',10),(36,'pork','400g',400),(36,'clove of garlic','2',10),(36,'ginger','2g',2),(36,'red chilli','1',10),(36,'spring onion','5',75),(36,'green vegetable','400g',400),(36,'black beans','1 tablespoon',15),(36,'groundnut oil','2 tablespoon',30),(37,'duck','1600g',1600),(37,'chinese five-spice powder','2 teaspoon',10),(37,'clementine','1',100),(37,'bay leaves','6',6),(37,'clove of garlic','12',60),(37,'carrot','2',200),(35,'spring onion','2',30),(35,'red chilli','2',20),(35,'radish','1 spring',5),(35,'red onion','3',450),(35,'star anise','3',3),(35,'apple juice','4 tablespoon',60),(35,'hoisin sauce','3 tablespoon',45),(35,'runny honey','2 tablespoon',30),(35,'tomato ketchup','1 tablespoon',15),(35,'rice wine vinegar','1 tablespoon',15),(36,'red wine','2 tablespoon',30),(36,'light soy sauce','1 tablespoon',15),(37,'red onion','2',200),(37,'flour','3 tablespoon',30),(37,'marsala','100 ml',100),(37,'chicken stock','1000 ml',1000),(38,'wonton wrapper','30',120),(38,'cornflour','a bit',5),(38,'groundnut oil','a bit',5),(38,'sweet chilli sauce','a bit',5),(38,'ginger','15g',15),(38,'clove of garlic','1',5),(38,'red chilli','1',10),(38,'chives','12g',12),(38,'prawn','200g',200),(38,'crabmeat','200g',200),(38,'oyster sauce','2 tablespoon',30),(38,'sesame oil','½ tablespoon',8),(39,'milk','350g',350),(39,'sunflower oil','30g',30),(39,'flour','200g',200),(39,'icing sugar','90g',90),(39,'corn starch','65g',65),(39,'vanilla','1 teaspoon',5),(39,'red food coloring paste','1/8 teaspoon',1),(39,'cocoa powder','1 teaspoon',5),(39,'hazelnut chocolate spread','100g',100),(39,'chocolate cookie spread','100g',100),(39,'strawberry spread','100g',100),(40,'egg noodles','250g',250),(40,'chicken breasts','250g',250),(40,'green cabbage','300g',300),(40,'asparagus','250g',250),(40,'corn','1',100),(40,'spring onion','1',50),(40,'red pepper','1',120),(40,'olive oil','2 tablespoon',30),(40,'soy sauce','2 tablespoon',30),(40,'sesame oil','3 tablespoon',45),(40,'balsamic vinegar','50g',50),(40,'coriander','2 tablespoon',30),(40,'balsamic vinegar','a bit',5),(40,'sesame seeds','a bit',5),(41,'rice','200g',200),(41,'sesame oil','1 teaspoon',5),(41,'sake','0,5 teaspoon',5),(41,'seaweed','2',10),(41,'carrot','1',100),(41,'avocado','1',200),(41,'soy sauce','a bit',5),(42,'olive oil','1 tablespoon',15),(42,'carrot','1',100),(42,'onion','1',100),(42,'spring onion','1',50),(42,'clove of garlic','1',5),(42,'egg','1',60),(42,'peas','100g',100),(42,'rice','200g',200),(42,'soy sauce','2 tablespoon',30),(42,'pepper','a bit',5),(43,'flour','500g',500),(43,'yeast','8g',8),(43,'icing sugar','50g',50),(43,'baking powder','1 teaspoon',5),(43,'salt','1 teaspoon',5),(43,'milk','100g',100),(43,'heavy cream','50g',50),(43,'sunflower oil','50g',50),(44,'mixed-colour pepper','3',300),(44,'onion','1',100),(44,'carrot','4',400),(44,'olive oil','4',4),(44,'clove of garlic','1',5),(44,'ginger','8',8),(44,'sesame oil','1 tablespoon',15),(44,'flour','1 tablespoon',15),(44,'wonton wrapper','10',40),(44,'sunflower oil','600g',600),(45,'sweetened condensed milk','400g',400),(45,'milk','400g',400),(45,'condensed milk','400g',400),(45,'brandy','30g',30),(45,'vanilla','1 teaspoon',5),(45,'egg','5',300),(45,'granulated sugar','130g',130),(45,'flour','160g',160),(45,'baking powder','0,5 teaspoon',2),(45,'salt','a bit',5),(45,'butter','1 teaspoon',5),(45,'mint','a bit',5),(45,'whipped cream','a bit',5),(46,'flour tortillas','6',180),(46,'chicken thighs','200g',200),(46,'onion','a bit',10),(46,'clove of garlic','1',5),(46,'cumin','1 teaspoon',5),(46,'yoghurt','100g',100),(46,'coriander','a bit',5),(46,'lime','a bit',10),(47,'mini tortillas','6',150),(47,'prawn','300g',300),(47,'granulated sugar','1 teaspoon',5),(47,'salt','1 teaspoon',5),(47,'paprika','1 teaspoon',5),(47,'cumin','1 teaspoon',5),(47,'oregano','1/4 teaspoon',1),(47,'chili flakes','1/4 teaspoon',1),(47,'olive oil','4 tablespoon',60),(47,'red wine vinegar','2 tablespoon',30),(47,'avocado','1',200),(47,'tomato','0.5',100),(47,'onion','1/3',50),(47,'lime','2',40),(47,'salt','a bit',5),(47,'pepper','a bit',5),(47,'yoghurt','100g',100),(47,'coriander','2 tablespoon',30),(48,'butter','50g',50),(48,'flour','50g',50),(48,'milk','400g',400),(48,'granulated sugar','170g',170),(48,'anthotyro cheese','250g',250),(48,'xynomizithra cheese','300g',300),(48,'vanilla','a bit',5),(48,'phyllo dough sheet','12',360),(48,'cinnamon','a bit',5),(49,'sunflower oil','1000ml',1000),(49,'onion','1',100),(49,'potato','2',300),(49,'egg','7',420),(49,'salt','a bit',5),(49,'thyme','2 tablespoon',30),(49,'olive oil','2 tablespoon',30),(49,'thyme','a bit',5),(50,'cod','1000g',1000),(50,'salt','a bit',5),(50,'pepper','a bit',5),(50,'cod','150g',150),(50,'clove of garlic','1',5),(50,'parsley','2 tablespoon',30),(50,'paprika','1 teaspoon',5),(50,'oregano','1 teaspoon',5),(50,'olive oil','7 tablespoon',105),(50,'egg','2',120),(50,'flour','100g',100),(50,'rice wine vinegar','2 tablespoon',30),(50,'potato','2',300),(51,'rice','150g',150),(51,'asparagus','320g',320),(51,'clove of garlic','1',5),(51,'ginger','5g',5),(51,'egg','1',60),(51,'olive oil','a bit',5),(51,'chipolata','1',100),(51,'soy sauce','1 tablespoon',15),(51,'sesame seeds','1 teaspoon',5),(51,'chilli jam','1 teaspoon',5),(52,'pork','1200g',1200),(52,'onion','1',100),(52,'clove of garlic','1',5),(52,'olive oil','2 tablespoons',30),(52,'bay leaves','2',10),(52,'chicken bouillon cube','1',5),(52,'white wine','300g',300),(52,'seed oil','500g',500),(52,'potato','1000g',1000),(52,'coriander','1 teaspoon',5),(52,'oregano','1 teaspoon',5),(52,'lemon zest','a bit',5),(52,'lemon juice','2 tablespoons',30),(52,'salt','a bit',5),(52,'pepper','a bit',5),(53,'icing sugar','a bit',5),(53,'water','720g',720),(53,'granulated sugar','400g',400),(53,'gelatin powder','40g',40),(53,'corn starch','110g',110),(53,'icing sugar','180g',180),(53,'citric acid powder','1/2 teaspoon',2),(53,'rosewater','1/2 teaspoon',2),(53,'red food coloring paste','1/4 teaspoon',1),(53,'seed oil','a bit',5),(54,'water','500g',500),(54,'granulated sugar','300g',300),(54,'butter','250g',250),(54,'toasted chickpeas','250g',250),(54,'cinnamon','a bit',5),(54,'raspberry','a bit',5),(54,'berry jam','a bit',5),(54,'ice cream','a bit',5),(54,'icing sugar','a bit',5),(54,'mint','a bit',5),(55,'onion','1',100),(55,'clove of garlic','2',10),(55,'olive oil','2 tablespoon',30),(51,'prawn','4',100),(51,'tikka paste','1 teaspoon',5),(55,'ground lamb','500g',500),(55,'cumin','1 teaspoon',5),(55,'paprika','1 teaspoon',5),(61,'granulated sugar','50g',50),(61,'flour','500g',500),(61,'orange zest','100g',100),(61,'sunflower oil','50g',50),(61,'orange juice','150g',150),(61,'salt','5g',5),(61,'tahini','350g',350),(61,'cinnamon','1 teaspoon',5),(60,'vinegar','2 tablespoons',30),(60,'orange juice','50g',50),(60,'water','300g',300),(61,'water','170g',170),(61,'brown sugar','120g',120),(61,'water','100g',100),(61,'yeast','8g',8),(60,'granulated sugar','2 tablespoons',30),(60,'pepper','0.5 teaspoon',2),(60,'balsamic cream','2 tablespoons',30),(60,'pistachio','100g',100),(60,'flour','500g',500),(60,'salt','1 teaspoon',5),(60,'olive oil','4 tablespoons',60),(60,'sunflower oil','4 tablespoons',60),(58,'granulated sugar','300g',300),(58,'cinnamon','1 stick',5),(58,'lemon','0.5',50),(58,'phyllo dough sheet','6',180),(58,'margarine','100g',100),(58,'cinnamon','2 tablespoons',30),(58,'tahini','360g',360),(59,'cherry spoon sweet','50g',50),(59,'bitter orange spoon sweet','50g',50),(59,'walnut spoon sweet','50g',50),(59,'kumquat spoon sweet','50g',50),(59,'flour','300g',300),(59,'egg','5',300),(59,'brown sugar','80g',80),(59,'margarine','170g',170),(59,'brandy','30g',30),(59,'carob honey','50g',50),(59,'orange zest','a bit',5),(59,'orange juice','a bit',50),(59,'raisins','50g',50),(59,'almonds','50g',50),(59,'hazelnuts','50g',50),(59,'walnuts','50g',50),(59,'milk','100ml',100),(59,'coconut','50g',50),(59,'cinnamon','1 teaspoon',5),(59,'nutmeg','0.5 teaspoon',2),(59,'ginger','0.5 teaspoon',2),(59,'vanilla extract','1 teaspoon',5),(59,'rosewater','1 teaspoon',5),(59,'baking powder','1 tablespoon',15),(59,'sugar','200g',200),(59,'lemon','2',100),(60,'pumpkin','1000g',1000),(60,'wheat','100g',100),(60,'angel hair pasta','30g',30),(60,'raisins','100g',100),(60,'onion','0.5',50),(60,'olive oil','2 tablespoons',30),(60,'cinnamon','1 teaspoon',5),(55,'chili flakes','1/2 teaspoon',2),(55,'salt','a bit',5),(55,'pepper','a bit',5),(55,'tomato paste','1 tablespoon',15),(55,'canned tomatoes','400g',400),(55,'rosemary','1 tablespoon',15),(55,'spinach tortillas','340g',340),(55,'gruyere cheese','100g',100),(56,'granulated sugar','170g',170),(57,'granulated sugar','350g',350),(57,'salt','a bit',5),(57,'mastic','1g',1),(57,'vanilla','5g',5),(57,'butter','1 tablespoon',15),(57,'icing sugar','40g',40),(58,'water','250g',250),(56,'water','120g',120),(56,'cinnamon','a bit',5),(56,'lemon juice','1 teaspoon',5),(56,'shredded phyllo dough','200g',200),(57,'heavy cream','300g',300),(57,'corn starch','170g',170),(56,'butter','100g',100),(56,'honey','20g',20),(56,'mozarella','200g',200),(57,'milk','1500g',1500),(62,'onion','1',160),(62,'clove of garlic','2',6),(62,'potato','700',700),(62,'olive oil','2 tablespoons',30),(62,'chorizo','150',150),(62,'paprika','a bit',8),(63,'cod','500',500),(63,'parsley','30',30),(63,'lemon','1',180),(63,'onion','3',160),(63,'olive oil','2 tablespoons',30),(63,'olive oil','20',20),(63,'chili flakes','2',15),(63,'potato','500',500),(63,'egg','6',390),(64,'onion','2',200),(64,'olive oil','2',30),(64,'salt','to taste',5),(64,'pepper','to taste',5),(64,'granulated sugar','1',12),(64,'dried macaroni','250',250),(64,'butter','50',50),(64,'flour','50',50),(64,'mustard','2',30),(64,'chili flakes','2',15),(64,'thyme','2',10),(64,'milk','600',600),(64,'Cheddar cheese','300',300),(65,'onion','1',160),(65,'clove of garlic','1',3),(65,'ginger','15',15),(65,'red pepper','1',150),(65,'flour tortillas','2',100),(65,'green cabbage','1',400),(65,'carrot','3',300),(65,'prawn','500',500),(65,'white fish fillet','100',100),(65,'sunflower oil','1',15),(65,'cumin','1',5),(65,'chili flakes','1',3),(65,'salt','a bit',5),(65,'pepper','a bit',5),(65,'soy sauce','100',100),(65,'coriander','a bit',5),(65,'lime','0.5',30),(66,'tomato','400',400),(66,'red pepper','1',150),(66,'cucumber','1',300),(66,'onion','1',160),(66,'clove of garlic','1',3),(66,'basil','1',3),(66,'granulated sugar','1',12),(66,'olive oil','2',30),(66,'red wine vinegar','2',30),(66,'salt','a bit',6),(66,'pepper','a bit',7),(66,'bread','2',200),(67,'cod','300',300),(67,'potato','500',500),(67,'egg','2',130),(67,'parsley','15',15),(68,'potato','1000',1000),(68,'pepper','3',270),(68,'smoked paprika','1',10),(68,'thyme','20',20),(69,'sausage','400',400),(69,'onion','320',320),(69,'plum tomatoes','800',800),(69,'feta cheese','200',200),(68,'chicken breasts','1500',1500);
 /*!40000 ALTER TABLE `recipe_ingredient` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`harris`@`localhost`*/ /*!50003 TRIGGER `calculate_nutritional_info` AFTER INSERT ON `recipe_ingredient` FOR EACH ROW BEGIN
+    DECLARE existing_total_calories DECIMAL(10,2);
+    DECLARE existing_total_protein DECIMAL(10,2);
+    DECLARE existing_total_fats DECIMAL(10,2);
+    DECLARE existing_total_carbs DECIMAL(10,2);
+    DECLARE new_total_calories DECIMAL(10,2);
+    DECLARE new_total_protein DECIMAL(10,2);
+    DECLARE new_total_fats DECIMAL(10,2);
+    DECLARE new_total_carbs DECIMAL(10,2);
+    DECLARE ingredient_calories DECIMAL(10,2);
+    DECLARE ingredient_protein DECIMAL(10,2);
+    DECLARE ingredient_fats DECIMAL(10,2);
+    DECLARE ingredient_carbs DECIMAL(10,2);
+
+    -- Retrieve nutritional information for the newly inserted ingredient
+    SELECT calories, protein, fats, carbs INTO ingredient_calories, ingredient_protein, ingredient_fats, ingredient_carbs
+    FROM ingredient
+    WHERE name = NEW.ingredient;
+
+    -- Retrieve existing nutritional information for the recipe
+    SELECT calories, protein, fats, carbs INTO existing_total_calories, existing_total_protein, existing_total_fats, existing_total_carbs
+    FROM nutritional_information
+    WHERE recipe_id = NEW.recipe_id;
+
+    -- Calculate nutritional information for the newly inserted ingredient
+    SET new_total_calories = (NEW.grams * ingredient_calories) / 100;
+    SET new_total_protein = (NEW.grams * ingredient_protein) / 100;
+    SET new_total_fats = (NEW.grams * ingredient_fats) / 100;
+    SET new_total_carbs = (NEW.grams * ingredient_carbs) / 100;
+
+    -- If there are no existing records, insert a new record with the calculated nutritional information
+    IF existing_total_calories IS NULL THEN
+        INSERT INTO nutritional_information (recipe_id, calories, protein, fats, carbs)
+        VALUES (NEW.recipe_id, new_total_calories, new_total_protein, new_total_fats, new_total_carbs);
+    ELSE
+        -- Update existing nutritional information with the new values
+        SET new_total_calories = existing_total_calories + new_total_calories;
+        SET new_total_protein = existing_total_protein + new_total_protein;
+        SET new_total_fats = existing_total_fats + new_total_fats;
+        SET new_total_carbs = existing_total_carbs + new_total_carbs;
+
+        UPDATE nutritional_information
+        SET calories = new_total_calories,
+            protein = new_total_protein,
+            fats = new_total_fats,
+            carbs = new_total_carbs
+        WHERE recipe_id = NEW.recipe_id;
+    END IF;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+
+--
+-- Temporary view structure for view `recipe_ingredient_view`
+--
+
+DROP TABLE IF EXISTS `recipe_ingredient_view`;
+/*!50001 DROP VIEW IF EXISTS `recipe_ingredient_view`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `recipe_ingredient_view` AS SELECT 
+ 1 AS `recipe_id`,
+ 1 AS `ingredient`,
+ 1 AS `amount`,
+ 1 AS `grams`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Table structure for table `recipe_meal`
+--
+
+DROP TABLE IF EXISTS `recipe_meal`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `recipe_meal` (
+  `recipe_id` int NOT NULL,
+  `meal` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  UNIQUE KEY `c1` (`recipe_id`,`meal`),
+  KEY `meal` (`meal`),
+  CONSTRAINT `recipe_meal_ibfk_1` FOREIGN KEY (`recipe_id`) REFERENCES `recipe` (`recipe_id`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `recipe_meal_ibfk_2` FOREIGN KEY (`meal`) REFERENCES `meals` (`meal`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `recipe_meal`
@@ -186,6 +669,37 @@ INSERT INTO `recipe_meal` VALUES (1,'breakfast'),(3,'breakfast'),(10,'breakfast'
 UNLOCK TABLES;
 
 --
+-- Temporary view structure for view `recipe_meal_view`
+--
+
+DROP TABLE IF EXISTS `recipe_meal_view`;
+/*!50001 DROP VIEW IF EXISTS `recipe_meal_view`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `recipe_meal_view` AS SELECT 
+ 1 AS `recipe_id`,
+ 1 AS `meal`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Table structure for table `recipe_tag`
+--
+
+DROP TABLE IF EXISTS `recipe_tag`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `recipe_tag` (
+  `recipe_id` int NOT NULL,
+  `tag` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  UNIQUE KEY `c1` (`recipe_id`,`tag`),
+  KEY `tag` (`tag`),
+  KEY `rt_recipe_id_index` (`recipe_id`),
+  CONSTRAINT `recipe_tag_ibfk_1` FOREIGN KEY (`recipe_id`) REFERENCES `recipe` (`recipe_id`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `recipe_tag_ibfk_2` FOREIGN KEY (`tag`) REFERENCES `tags` (`tag`) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `recipe_tag`
 --
 
@@ -194,6 +708,66 @@ LOCK TABLES `recipe_tag` WRITE;
 INSERT INTO `recipe_tag` VALUES (2,'desserts'),(2,'dinner for 2'),(2,'romantic meals'),(3,'brunch'),(3,'healthy'),(3,'kosher'),(3,'quick'),(4,'desserts'),(4,'puddings and desserts'),(5,'family classics'),(6,'finger food'),(7,'family classics'),(8,'30-minute-meals'),(8,'pies and pastries'),(9,'family classics'),(9,'healthy'),(9,'mains'),(10,'brunch'),(10,'healthy'),(10,'quick'),(10,'summer'),(11,'healthy'),(11,'mains'),(11,'quick'),(11,'vegetarian'),(12,'brunch'),(12,'healthy'),(12,'quick'),(12,'vegetarian'),(13,'christmas'),(13,'comfort'),(13,'exotic'),(14,'appetizer'),(14,'finger food'),(14,'party food'),(14,'quick'),(15,'alternative pizza'),(15,'light'),(15,'vegetarian'),(16,'comfort'),(16,'desserts'),(16,'party food'),(16,'quick'),(17,'comfort'),(17,'desserts'),(17,'quick'),(18,'exotic'),(18,'spicy'),(18,'vegetarian'),(19,'healthy'),(19,'mains'),(19,'vegan'),(19,'vegetarian'),(20,'healthy'),(20,'side dish'),(20,'vegetarian'),(21,'dinner for 2'),(21,'healthy'),(21,'romantic meals'),(21,'vegetarian'),(22,'dinner for 2'),(23,'desserts'),(23,'light'),(24,'comfort'),(24,'kid-friendly'),(24,'quick'),(24,'vegetarian'),(25,'dinner party'),(25,'vegetarian'),(26,'christmas'),(26,'dinner for 2'),(27,'comfort'),(27,'gourmet'),(27,'homemade'),(28,'quick'),(29,'desserts'),(30,'comfort'),(30,'desserts'),(31,'healthy'),(31,'quick'),(32,'family classics'),(32,'quick'),(33,'night'),(33,'winter warmer'),(34,'exotic'),(34,'quick'),(34,'vegan'),(34,'vegetarian'),(35,'christmas'),(35,'dinner party'),(35,'mains'),(36,'exotic'),(36,'healthy'),(36,'quick'),(37,'dinner party'),(37,'mains'),(38,'exotic'),(38,'finger food'),(38,'healthy'),(38,'party food'),(39,'christmas'),(39,'desserts'),(39,'party food'),(40,'dairy free'),(40,'exotic'),(40,'light'),(41,'exotic'),(41,'healthy'),(41,'party food'),(41,'vegan'),(42,'dairy free'),(42,'exotic'),(42,'healthy'),(42,'vegetarian'),(43,'finger food'),(43,'kid-friendly'),(43,'party food'),(44,'exotic'),(44,'finger food'),(44,'party food'),(44,'vegetarian'),(45,'desserts'),(45,'exotic'),(45,'family classics'),(46,'finger food'),(46,'kid-friendly'),(46,'party food'),(46,'quick'),(47,'finger food'),(47,'kid-friendly'),(47,'party food'),(47,'quick'),(48,'desserts'),(49,'comfort'),(49,'side dish'),(49,'vegetarian'),(50,'comfort'),(50,'dairy free'),(52,'comfort'),(52,'quick'),(53,'desserts'),(53,'exotic'),(53,'quick'),(54,'desserts'),(54,'exotic'),(54,'vegetarian'),(55,'exotic'),(55,'nuts-free diet'),(56,'comfort'),(56,'desserts'),(57,'desserts'),(57,'nuts-free diet'),(57,'vegetarian'),(58,'desserts'),(58,'quick'),(59,'desserts'),(59,'exotic'),(59,'healthy'),(60,'healthy'),(60,'light'),(60,'vegetarian'),(61,'desserts'),(62,'comfort'),(62,'exotic'),(62,'family classics'),(63,'family classics'),(64,'comfort'),(64,'family classics'),(64,'mains'),(65,'exotic'),(65,'healthy'),(66,'healthy'),(66,'light'),(67,'dinner for 2'),(67,'mains'),(68,'family classics'),(68,'healthy'),(69,'comfort'),(69,'mains');
 /*!40000 ALTER TABLE `recipe_tag` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Temporary view structure for view `recipe_tag_view`
+--
+
+DROP TABLE IF EXISTS `recipe_tag_view`;
+/*!50001 DROP VIEW IF EXISTS `recipe_tag_view`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `recipe_tag_view` AS SELECT 
+ 1 AS `recipe_id`,
+ 1 AS `tag`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary view structure for view `recipe_view`
+--
+
+DROP TABLE IF EXISTS `recipe_view`;
+/*!50001 DROP VIEW IF EXISTS `recipe_view`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `recipe_view` AS SELECT 
+ 1 AS `recipe_id`,
+ 1 AS `name`,
+ 1 AS `sweet`,
+ 1 AS `ethnicity`,
+ 1 AS `difficulty`,
+ 1 AS `brief`,
+ 1 AS `number_steps`,
+ 1 AS `main_ingredient`,
+ 1 AS `img`,
+ 1 AS `img_descr`,
+ 1 AS `theme_name`,
+ 1 AS `portions`,
+ 1 AS `tip1`,
+ 1 AS `tip2`,
+ 1 AS `tip3`,
+ 1 AS `cooking_time`,
+ 1 AS `preparation_time`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Table structure for table `step`
+--
+
+DROP TABLE IF EXISTS `step`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `step` (
+  `series` int NOT NULL,
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `img` blob,
+  `img_descr` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `recipe_id` int NOT NULL,
+  KEY `fk_step_1_idx` (`recipe_id`),
+  CONSTRAINT `fk_step_1` FOREIGN KEY (`recipe_id`) REFERENCES `recipe` (`recipe_id`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `step_chk_1` CHECK ((`series` >= 0))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `step`
@@ -206,6 +780,22 @@ INSERT INTO `step` VALUES (1,'Place the tomatoes into a large, heatproof bowl an
 UNLOCK TABLES;
 
 --
+-- Table structure for table `tags`
+--
+
+DROP TABLE IF EXISTS `tags`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tags` (
+  `tag` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `img` blob,
+  `img_descr` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  PRIMARY KEY (`tag`),
+  KEY `idx_tags_tag` (`tag`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `tags`
 --
 
@@ -216,6 +806,21 @@ INSERT INTO `tags` VALUES ('30-minute-meals',NULL,NULL),('alternative pizza',NUL
 UNLOCK TABLES;
 
 --
+-- Table structure for table `theme`
+--
+
+DROP TABLE IF EXISTS `theme`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `theme` (
+  `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  KEY `idx_theme_name` (`name`),
+  KEY `idx_name` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `theme`
 --
 
@@ -224,6 +829,300 @@ LOCK TABLES `theme` WRITE;
 INSERT INTO `theme` VALUES ('homemade favorites','Comforting dishes that evoke a sense of homemade goodness and nostalgia.'),('sweet indulgences','Decadent desserts and treats that satisfy the sweet tooth and bring joy.'),('classic comfort','Timeless recipes that provide warmth, familiarity, and a sense of satisfaction.'),('gourmet eats','Sophisticated and elevated dishes that showcase culinary expertise and luxury ingredients.'),('flavorful treats','Dishes bursting with bold and delicious flavors that tantalize the taste buds.'),('fusion delights','Culinary creations that blend diverse culinary traditions and ingredients for unique and innovative flavors.'),('quick & tasty','Convenient and easy-to-make recipes perfect for busy lifestyles without sacrificing flavor.'),('comforting classics','Traditional dishes that offer comfort, nostalgia, and a feeling of home.'),('international flavors','Dishes that highlight the diverse and vibrant flavors of cuisines from around the world.'),('traditional delicacies','Authentic recipes passed down through generations, preserving cultural heritage and tradition.'),('hearty dinners','Comforting, substantial meals packed with robust flavors and wholesome ingredients, perfect for satisfying appetites and warming souls.');
 /*!40000 ALTER TABLE `theme` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Dumping events for database 'masterchef'
+--
+
+--
+-- Dumping routines for database 'masterchef'
+--
+/*!50003 DROP PROCEDURE IF EXISTS `calculate_assignment_rating` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`harris`@`localhost` PROCEDURE `calculate_assignment_rating`()
+BEGIN
+    DECLARE done INT DEFAULT FALSE;
+    DECLARE assignment_id_val INT;
+    DECLARE rating_sum DECIMAL(5, 2);
+    DECLARE rating_avg DECIMAL(5, 2);
+    
+    -- Declare cursor to fetch assignment IDs where rating is null
+    DECLARE assignment_cursor CURSOR FOR 
+        SELECT assignment_id FROM assignment WHERE result IS NULL;
+    
+    -- Declare continue handler for cursor
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+    
+    OPEN assignment_cursor;
+    
+    assignment_loop:LOOP
+        FETCH assignment_cursor INTO assignment_id_val;
+        IF done THEN
+            LEAVE assignment_loop;
+        END IF;
+        
+        -- Calculate average rating for the assignment
+        SELECT (SUM(rating) / 3) INTO rating_sum
+        FROM assignment_rating
+        WHERE assignment_id = assignment_id_val;
+        
+        SET rating_avg = IFNULL(rating_sum, 0);
+        
+        -- Update assignment table with the calculated average rating
+        UPDATE assignment
+        SET result = rating_avg
+        WHERE assignment_id = assignment_id_val;
+    END LOOP;
+    
+    CLOSE assignment_cursor;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `CreateChefUserView` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`harris`@`localhost` PROCEDURE `CreateChefUserView`(IN given_chef_id INT)
+BEGIN
+    SET @view_sql = CONCAT('
+        CREATE OR REPLACE VIEW chef_user_', given_chef_id, ' AS
+        SELECT  
+            r.name AS recipe_name, 
+            r.recipe_id, 
+            r.main_ingredient, 
+            r.theme_name, 
+            r.sweet, 
+            r.ethnicity AS recipe_ethnicity, 
+            r.difficulty,
+            r.brief, 
+            r.number_steps, 
+            r.tip1, 
+            r.tip2, 
+            r.tip3, 
+            r.portions, 
+            r.preparation_time, 
+            r.cooking_time,
+            CONCAT(c.first_name, '' '', c.last_name) AS chef_name, 
+            c.chef_id, 
+            c.first_name, 
+            c.last_name, 
+            c.ethnicity AS chef_ethnicity, 
+            c.phone, 
+            c.date_of_birth, 
+            c.title,
+            c.experience, 
+            c.year, 
+            GROUP_CONCAT(DISTINCT re.equipment_name) AS equipment_names, 
+            GROUP_CONCAT(DISTINCT rm.meal) AS meals, 
+            GROUP_CONCAT(DISTINCT ri.ingredient) AS ingredients, 
+            GROUP_CONCAT(DISTINCT ri.amount) AS ingredient_amounts, 
+            GROUP_CONCAT(DISTINCT ri.grams) AS ingredient_grams, 
+            GROUP_CONCAT(DISTINCT rt.tag) AS tags
+        FROM 
+            recipe r
+        JOIN 
+            assignment a ON r.recipe_id = a.recipe_id
+        JOIN 
+            recipe_equipment re ON r.recipe_id = re.recipe_id
+        JOIN 
+            recipe_meal rm ON r.recipe_id = rm.recipe_id
+        JOIN 
+            recipe_ingredient ri ON r.recipe_id = ri.recipe_id
+        JOIN 
+            recipe_tag rt ON r.recipe_id = rt.recipe_id
+        JOIN 
+            chef c ON a.chef_id = c.chef_id
+        WHERE 
+            c.chef_id = ', given_chef_id, '
+        GROUP BY 
+            r.recipe_id;
+    ');
+
+    PREPARE stmt FROM @view_sql;
+    EXECUTE stmt;
+    DEALLOCATE PREPARE stmt;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `GetTopRatingsForChef` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`harris`@`localhost` PROCEDURE `GetTopRatingsForChef`(IN chef_id_param INT)
+BEGIN
+    SELECT judge_id, chef_id, SUM(rating) AS total_rating 
+    FROM assignment_rating 
+    WHERE chef_id = chef_id_param
+    GROUP BY judge_id, chef_id 
+    ORDER BY total_rating DESC
+    LIMIT 5;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `UpdateChefExpertiseLevel` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`harris`@`localhost` PROCEDURE `UpdateChefExpertiseLevel`()
+BEGIN
+    UPDATE chef
+    SET expertise_level = CASE
+        WHEN title = 'chef' THEN 5
+        WHEN title = 'sous chef' THEN 4
+        WHEN title = 'A cook' THEN 3
+        WHEN title = 'B cook' THEN 2
+        WHEN title = 'C cook' THEN 1
+        ELSE NULL
+    END;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+
+--
+-- Final view structure for view `chef_view`
+--
+
+/*!50001 DROP VIEW IF EXISTS `chef_view`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_unicode_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`harris`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `chef_view` AS select `chef`.`chef_id` AS `chef_id`,`chef`.`first_name` AS `first_name`,`chef`.`last_name` AS `last_name`,`chef`.`phone` AS `phone`,`chef`.`date_of_birth` AS `date_of_birth`,`chef`.`age` AS `age`,`chef`.`image` AS `image`,`chef`.`image_desc` AS `image_desc`,`chef`.`experience` AS `experience`,`chef`.`title` AS `title`,`chef`.`year` AS `year`,`chef`.`ethnicity` AS `ethnicity`,`chef`.`expertise_level` AS `expertise_level` from `chef` where (`chef`.`chef_id` = 105) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `recipe_equipment_view`
+--
+
+/*!50001 DROP VIEW IF EXISTS `recipe_equipment_view`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`harris`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `recipe_equipment_view` AS select `recipe_equipment`.`recipe_id` AS `recipe_id`,`recipe_equipment`.`equipment_name` AS `equipment_name` from `recipe_equipment` where `recipe_equipment`.`recipe_id` in (select `recipe_view`.`recipe_id` from `recipe_view`) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `recipe_ingredient_view`
+--
+
+/*!50001 DROP VIEW IF EXISTS `recipe_ingredient_view`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`harris`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `recipe_ingredient_view` AS select `recipe_ingredient`.`recipe_id` AS `recipe_id`,`recipe_ingredient`.`ingredient` AS `ingredient`,`recipe_ingredient`.`amount` AS `amount`,`recipe_ingredient`.`grams` AS `grams` from `recipe_ingredient` where `recipe_ingredient`.`recipe_id` in (select `recipe_view`.`recipe_id` from `recipe_view`) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `recipe_meal_view`
+--
+
+/*!50001 DROP VIEW IF EXISTS `recipe_meal_view`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`harris`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `recipe_meal_view` AS select `recipe_meal`.`recipe_id` AS `recipe_id`,`recipe_meal`.`meal` AS `meal` from `recipe_meal` where `recipe_meal`.`recipe_id` in (select `recipe_view`.`recipe_id` from `recipe_view`) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `recipe_tag_view`
+--
+
+/*!50001 DROP VIEW IF EXISTS `recipe_tag_view`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`harris`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `recipe_tag_view` AS select `recipe_tag`.`recipe_id` AS `recipe_id`,`recipe_tag`.`tag` AS `tag` from `recipe_tag` where `recipe_tag`.`recipe_id` in (select `recipe_view`.`recipe_id` from `recipe_view`) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `recipe_view`
+--
+
+/*!50001 DROP VIEW IF EXISTS `recipe_view`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`harris`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `recipe_view` AS select `recipe`.`recipe_id` AS `recipe_id`,`recipe`.`name` AS `name`,`recipe`.`sweet` AS `sweet`,`recipe`.`ethnicity` AS `ethnicity`,`recipe`.`difficulty` AS `difficulty`,`recipe`.`brief` AS `brief`,`recipe`.`number_steps` AS `number_steps`,`recipe`.`main_ingredient` AS `main_ingredient`,`recipe`.`img_url` AS `img`,`recipe`.`img_descr` AS `img_descr`,`recipe`.`theme_name` AS `theme_name`,`recipe`.`portions` AS `portions`,`recipe`.`tip1` AS `tip1`,`recipe`.`tip2` AS `tip2`,`recipe`.`tip3` AS `tip3`,`recipe`.`cooking_time` AS `cooking_time`,`recipe`.`preparation_time` AS `preparation_time` from `recipe` where `recipe`.`recipe_id` in (select `assignment`.`recipe_id` from `assignment` where (`assignment`.`chef_id` = 105)) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -234,4 +1133,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-25  5:05:46
+-- Dump completed on 2024-05-25  5:06:17

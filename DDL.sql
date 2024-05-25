@@ -33,7 +33,7 @@ CREATE TABLE `assignment` (
   PRIMARY KEY (`assignment_id`),
   KEY `chef_id` (`chef_id`),
   KEY `recipe_id` (`recipe_id`),
-  KEY `a_recipe_id_index` (`recipe_id`),
+  KEY `idx_assignment_id` (`recipe_id`),
   CONSTRAINT `fk_assignment_chef` FOREIGN KEY (`chef_id`) REFERENCES `chef` (`chef_id`) ON UPDATE CASCADE,
   CONSTRAINT `fk_assignment_recipe` FOREIGN KEY (`recipe_id`) REFERENCES `recipe` (`recipe_id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -339,7 +339,7 @@ CREATE TABLE `recipe` (
   `tip3` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `cooking_time` int NOT NULL,
   `preparation_time` int NOT NULL,
-  `img_url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `img_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`recipe_id`),
   KEY `idx_recipe_main_ingredient` (`main_ingredient`),
   KEY `idx_recipe_theme_name` (`theme_name`),
@@ -923,4 +923,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-25  4:26:55
+-- Dump completed on 2024-05-25  5:05:19
