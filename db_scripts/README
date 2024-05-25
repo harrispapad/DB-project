@@ -8,4 +8,4 @@
   iii) create_episode judge
   iv) assignment_rating
 
-3) Εκτελούμε εντός της ΒΔ το procedure calculate_assignment_rating ώστε να συμπληρωθεί και το τελευταίο field του πίνακα assignment
+3) Εκτελούμε εντός της ΒΔ το procedure calculate_assignment_rating ώστε να συμπληρωθεί και το τελευταίο field του πίνακα assignment καθώς και το UpdateChefExpertiseLevel
