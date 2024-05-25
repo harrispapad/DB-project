@@ -2,7 +2,7 @@
 
 1) sudo apt install python3-mysql.connector
 
-2) Εκτελούμε με python3 _.py με την εξής σειρά τα αρχεία
+2) Εκτελούμε με python3 _.py με την εξής σειρά τα αρχεία, προσαρμόζοντας το loop του year στην μειν ανάλογα την χρονιά για την οποία θέλουμε να φτιάξουμε επεισόδια:
   i) create_assignments
   ii) create_episode_assignment
   iii) create_episode judge
