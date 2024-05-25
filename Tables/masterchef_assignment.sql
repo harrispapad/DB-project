@@ -18,27 +18,6 @@ USE `masterchef`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `assignment`
---
-
-DROP TABLE IF EXISTS `assignment`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `assignment` (
-  `assignment_id` int NOT NULL,
-  `chef_id` int NOT NULL,
-  `recipe_id` int NOT NULL,
-  `result` int DEFAULT NULL,
-  `year` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`assignment_id`),
-  KEY `chef_id` (`chef_id`),
-  KEY `recipe_id` (`recipe_id`),
-  CONSTRAINT `fk_assignment_chef` FOREIGN KEY (`chef_id`) REFERENCES `chef` (`chef_id`) ON UPDATE CASCADE,
-  CONSTRAINT `fk_assignment_recipe` FOREIGN KEY (`recipe_id`) REFERENCES `recipe` (`recipe_id`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Dumping data for table `assignment`
 --
 
@@ -57,4 +36,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-24  9:01:28
+-- Dump completed on 2024-05-25  4:08:17

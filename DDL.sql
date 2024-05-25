@@ -307,7 +307,6 @@ CREATE TABLE `recipe` (
   `brief` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `number_steps` int NOT NULL,
   `main_ingredient` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `img` blob,
   `img_descr` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `theme_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `portions` int NOT NULL,
@@ -316,6 +315,7 @@ CREATE TABLE `recipe` (
   `tip3` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `cooking_time` int NOT NULL,
   `preparation_time` int NOT NULL,
+  `img_url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`recipe_id`),
   KEY `idx_recipe_main_ingredient` (`main_ingredient`),
   KEY `idx_recipe_theme_name` (`theme_name`),
@@ -534,6 +534,14 @@ CREATE TABLE `theme` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping events for database 'masterchef'
+--
+
+--
+-- Dumping routines for database 'masterchef'
+--
+
+--
 -- Final view structure for view `chef_view`
 --
 
@@ -636,7 +644,7 @@ CREATE TABLE `theme` (
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`harris`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `recipe_view` AS select `recipe`.`recipe_id` AS `recipe_id`,`recipe`.`name` AS `name`,`recipe`.`sweet` AS `sweet`,`recipe`.`ethnicity` AS `ethnicity`,`recipe`.`difficulty` AS `difficulty`,`recipe`.`brief` AS `brief`,`recipe`.`number_steps` AS `number_steps`,`recipe`.`main_ingredient` AS `main_ingredient`,`recipe`.`img` AS `img`,`recipe`.`img_descr` AS `img_descr`,`recipe`.`theme_name` AS `theme_name`,`recipe`.`portions` AS `portions`,`recipe`.`tip1` AS `tip1`,`recipe`.`tip2` AS `tip2`,`recipe`.`tip3` AS `tip3`,`recipe`.`cooking_time` AS `cooking_time`,`recipe`.`preparation_time` AS `preparation_time` from `recipe` where `recipe`.`recipe_id` in (select `assignment`.`recipe_id` from `assignment` where (`assignment`.`chef_id` = 105)) */;
+/*!50001 VIEW `recipe_view` AS select `recipe`.`recipe_id` AS `recipe_id`,`recipe`.`name` AS `name`,`recipe`.`sweet` AS `sweet`,`recipe`.`ethnicity` AS `ethnicity`,`recipe`.`difficulty` AS `difficulty`,`recipe`.`brief` AS `brief`,`recipe`.`number_steps` AS `number_steps`,`recipe`.`main_ingredient` AS `main_ingredient`,`recipe`.`img_url` AS `img`,`recipe`.`img_descr` AS `img_descr`,`recipe`.`theme_name` AS `theme_name`,`recipe`.`portions` AS `portions`,`recipe`.`tip1` AS `tip1`,`recipe`.`tip2` AS `tip2`,`recipe`.`tip3` AS `tip3`,`recipe`.`cooking_time` AS `cooking_time`,`recipe`.`preparation_time` AS `preparation_time` from `recipe` where `recipe`.`recipe_id` in (select `assignment`.`recipe_id` from `assignment` where (`assignment`.`chef_id` = 105)) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -650,4 +658,4 @@ CREATE TABLE `theme` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-25  0:42:08
+-- Dump completed on 2024-05-25  4:06:48

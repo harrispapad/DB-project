@@ -18,30 +18,6 @@ USE `masterchef`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `nutritional_information`
---
-
-DROP TABLE IF EXISTS `nutritional_information`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `nutritional_information` (
-  `recipe_id` int NOT NULL,
-  `calories` int NOT NULL,
-  `fats` int NOT NULL,
-  `protein` int NOT NULL,
-  `carbs` int NOT NULL,
-  `img` blob,
-  `img_descr` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  KEY `recipe_id` (`recipe_id`),
-  CONSTRAINT `fk_nutr_info_recipe` FOREIGN KEY (`recipe_id`) REFERENCES `recipe` (`recipe_id`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `nutritional_information_chk_1` CHECK ((`calories` >= 0)),
-  CONSTRAINT `nutritional_information_chk_2` CHECK ((`fats` >= 0)),
-  CONSTRAINT `nutritional_information_chk_3` CHECK ((`protein` >= 0)),
-  CONSTRAINT `nutritional_information_chk_4` CHECK ((`carbs` >= 0))
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Dumping data for table `nutritional_information`
 --
 
@@ -60,4 +36,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-24  9:01:29
+-- Dump completed on 2024-05-25  4:08:17

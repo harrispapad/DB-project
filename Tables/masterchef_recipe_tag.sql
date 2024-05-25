@@ -18,29 +18,12 @@ USE `masterchef`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `recipe_tag`
---
-
-DROP TABLE IF EXISTS `recipe_tag`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `recipe_tag` (
-  `recipe_id` int NOT NULL,
-  `tag` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  UNIQUE KEY `c1` (`recipe_id`,`tag`),
-  KEY `tag` (`tag`),
-  CONSTRAINT `recipe_tag_ibfk_1` FOREIGN KEY (`recipe_id`) REFERENCES `recipe` (`recipe_id`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `recipe_tag_ibfk_2` FOREIGN KEY (`tag`) REFERENCES `tags` (`tag`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Dumping data for table `recipe_tag`
 --
 
 LOCK TABLES `recipe_tag` WRITE;
 /*!40000 ALTER TABLE `recipe_tag` DISABLE KEYS */;
-INSERT INTO `recipe_tag` VALUES (8,'30-minute-meals'),(15,'alternative pizza'),(14,'appetizer'),(3,'brunch'),(10,'brunch'),(12,'brunch'),(13,'christmas'),(26,'christmas'),(35,'christmas'),(39,'christmas'),(13,'comfort'),(16,'comfort'),(17,'comfort'),(24,'comfort'),(27,'comfort'),(30,'comfort'),(49,'comfort'),(50,'comfort'),(52,'comfort'),(56,'comfort'),(62,'comfort'),(64,'comfort'),(69,'comfort'),(40,'dairy free'),(42,'dairy free'),(50,'dairy free'),(2,'desserts'),(4,'desserts'),(16,'desserts'),(17,'desserts'),(23,'desserts'),(29,'desserts'),(30,'desserts'),(39,'desserts'),(45,'desserts'),(48,'desserts'),(53,'desserts'),(54,'desserts'),(56,'desserts'),(57,'desserts'),(58,'desserts'),(59,'desserts'),(61,'desserts'),(2,'dinner for 2'),(21,'dinner for 2'),(22,'dinner for 2'),(26,'dinner for 2'),(67,'dinner for 2'),(25,'dinner party'),(35,'dinner party'),(37,'dinner party'),(13,'exotic'),(18,'exotic'),(34,'exotic'),(36,'exotic'),(38,'exotic'),(40,'exotic'),(41,'exotic'),(42,'exotic'),(44,'exotic'),(45,'exotic'),(53,'exotic'),(54,'exotic'),(55,'exotic'),(59,'exotic'),(62,'exotic'),(65,'exotic'),(5,'family classics'),(7,'family classics'),(9,'family classics'),(32,'family classics'),(45,'family classics'),(62,'family classics'),(63,'family classics'),(64,'family classics'),(68,'family classics'),(6,'finger food'),(14,'finger food'),(38,'finger food'),(43,'finger food'),(44,'finger food'),(46,'finger food'),(47,'finger food'),(27,'gourmet'),(3,'healthy'),(9,'healthy'),(10,'healthy'),(11,'healthy'),(12,'healthy'),(19,'healthy'),(20,'healthy'),(21,'healthy'),(31,'healthy'),(36,'healthy'),(38,'healthy'),(41,'healthy'),(42,'healthy'),(59,'healthy'),(60,'healthy'),(65,'healthy'),(66,'healthy'),(68,'healthy'),(27,'homemade'),(24,'kid-friendly'),(43,'kid-friendly'),(46,'kid-friendly'),(47,'kid-friendly'),(3,'kosher'),(15,'light'),(23,'light'),(40,'light'),(60,'light'),(66,'light'),(9,'mains'),(11,'mains'),(19,'mains'),(35,'mains'),(37,'mains'),(64,'mains'),(67,'mains'),(69,'mains'),(33,'night'),(55,'nuts-free diet'),(57,'nuts-free diet'),(14,'party food'),(16,'party food'),(38,'party food'),(39,'party food'),(41,'party food'),(43,'party food'),(44,'party food'),(46,'party food'),(47,'party food'),(8,'pies and pastries'),(4,'puddings and desserts'),(3,'quick'),(10,'quick'),(11,'quick'),(12,'quick'),(14,'quick'),(16,'quick'),(17,'quick'),(24,'quick'),(28,'quick'),(31,'quick'),(32,'quick'),(34,'quick'),(36,'quick'),(46,'quick'),(47,'quick'),(52,'quick'),(53,'quick'),(58,'quick'),(2,'romantic meals'),(21,'romantic meals'),(20,'side dish'),(49,'side dish'),(18,'spicy'),(10,'summer'),(19,'vegan'),(34,'vegan'),(41,'vegan'),(11,'vegetarian'),(12,'vegetarian'),(15,'vegetarian'),(18,'vegetarian'),(19,'vegetarian'),(20,'vegetarian'),(21,'vegetarian'),(24,'vegetarian'),(25,'vegetarian'),(34,'vegetarian'),(42,'vegetarian'),(44,'vegetarian'),(49,'vegetarian'),(54,'vegetarian'),(57,'vegetarian'),(60,'vegetarian'),(33,'winter warmer');
+INSERT INTO `recipe_tag` VALUES (2,'desserts'),(2,'dinner for 2'),(2,'romantic meals'),(3,'brunch'),(3,'healthy'),(3,'kosher'),(3,'quick'),(4,'desserts'),(4,'puddings and desserts'),(5,'family classics'),(6,'finger food'),(7,'family classics'),(8,'30-minute-meals'),(8,'pies and pastries'),(9,'family classics'),(9,'healthy'),(9,'mains'),(10,'brunch'),(10,'healthy'),(10,'quick'),(10,'summer'),(11,'healthy'),(11,'mains'),(11,'quick'),(11,'vegetarian'),(12,'brunch'),(12,'healthy'),(12,'quick'),(12,'vegetarian'),(13,'christmas'),(13,'comfort'),(13,'exotic'),(14,'appetizer'),(14,'finger food'),(14,'party food'),(14,'quick'),(15,'alternative pizza'),(15,'light'),(15,'vegetarian'),(16,'comfort'),(16,'desserts'),(16,'party food'),(16,'quick'),(17,'comfort'),(17,'desserts'),(17,'quick'),(18,'exotic'),(18,'spicy'),(18,'vegetarian'),(19,'healthy'),(19,'mains'),(19,'vegan'),(19,'vegetarian'),(20,'healthy'),(20,'side dish'),(20,'vegetarian'),(21,'dinner for 2'),(21,'healthy'),(21,'romantic meals'),(21,'vegetarian'),(22,'dinner for 2'),(23,'desserts'),(23,'light'),(24,'comfort'),(24,'kid-friendly'),(24,'quick'),(24,'vegetarian'),(25,'dinner party'),(25,'vegetarian'),(26,'christmas'),(26,'dinner for 2'),(27,'comfort'),(27,'gourmet'),(27,'homemade'),(28,'quick'),(29,'desserts'),(30,'comfort'),(30,'desserts'),(31,'healthy'),(31,'quick'),(32,'family classics'),(32,'quick'),(33,'night'),(33,'winter warmer'),(34,'exotic'),(34,'quick'),(34,'vegan'),(34,'vegetarian'),(35,'christmas'),(35,'dinner party'),(35,'mains'),(36,'exotic'),(36,'healthy'),(36,'quick'),(37,'dinner party'),(37,'mains'),(38,'exotic'),(38,'finger food'),(38,'healthy'),(38,'party food'),(39,'christmas'),(39,'desserts'),(39,'party food'),(40,'dairy free'),(40,'exotic'),(40,'light'),(41,'exotic'),(41,'healthy'),(41,'party food'),(41,'vegan'),(42,'dairy free'),(42,'exotic'),(42,'healthy'),(42,'vegetarian'),(43,'finger food'),(43,'kid-friendly'),(43,'party food'),(44,'exotic'),(44,'finger food'),(44,'party food'),(44,'vegetarian'),(45,'desserts'),(45,'exotic'),(45,'family classics'),(46,'finger food'),(46,'kid-friendly'),(46,'party food'),(46,'quick'),(47,'finger food'),(47,'kid-friendly'),(47,'party food'),(47,'quick'),(48,'desserts'),(49,'comfort'),(49,'side dish'),(49,'vegetarian'),(50,'comfort'),(50,'dairy free'),(52,'comfort'),(52,'quick'),(53,'desserts'),(53,'exotic'),(53,'quick'),(54,'desserts'),(54,'exotic'),(54,'vegetarian'),(55,'exotic'),(55,'nuts-free diet'),(56,'comfort'),(56,'desserts'),(57,'desserts'),(57,'nuts-free diet'),(57,'vegetarian'),(58,'desserts'),(58,'quick'),(59,'desserts'),(59,'exotic'),(59,'healthy'),(60,'healthy'),(60,'light'),(60,'vegetarian'),(61,'desserts'),(62,'comfort'),(62,'exotic'),(62,'family classics'),(63,'family classics'),(64,'comfort'),(64,'family classics'),(64,'mains'),(65,'exotic'),(65,'healthy'),(66,'healthy'),(66,'light'),(67,'dinner for 2'),(67,'mains'),(68,'family classics'),(68,'healthy'),(69,'comfort'),(69,'mains');
 /*!40000 ALTER TABLE `recipe_tag` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +36,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-24  9:01:30
+-- Dump completed on 2024-05-25  4:08:17

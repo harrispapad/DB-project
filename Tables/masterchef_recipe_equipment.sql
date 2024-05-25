@@ -18,23 +18,6 @@ USE `masterchef`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `recipe_equipment`
---
-
-DROP TABLE IF EXISTS `recipe_equipment`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `recipe_equipment` (
-  `recipe_id` int NOT NULL,
-  `equipment_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  KEY `recipe_id` (`recipe_id`),
-  KEY `equipment_name` (`equipment_name`),
-  CONSTRAINT `recipe_equipment_ibfk_1` FOREIGN KEY (`recipe_id`) REFERENCES `recipe` (`recipe_id`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `recipe_equipment_ibfk_2` FOREIGN KEY (`equipment_name`) REFERENCES `equipment` (`name`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Dumping data for table `recipe_equipment`
 --
 
@@ -53,4 +36,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-24  9:01:29
+-- Dump completed on 2024-05-25  4:08:16

@@ -18,22 +18,6 @@ USE `masterchef`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `tags`
---
-
-DROP TABLE IF EXISTS `tags`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `tags` (
-  `tag` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `img` blob,
-  `img_descr` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  PRIMARY KEY (`tag`),
-  KEY `idx_tags_tag` (`tag`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Dumping data for table `tags`
 --
 
@@ -52,4 +36,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-24  9:01:29
+-- Dump completed on 2024-05-25  4:08:17

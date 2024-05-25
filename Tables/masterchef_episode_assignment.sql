@@ -18,24 +18,6 @@ USE `masterchef`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `episode_assignment`
---
-
-DROP TABLE IF EXISTS `episode_assignment`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `episode_assignment` (
-  `episode_id` int NOT NULL,
-  `assignment_id` int NOT NULL,
-  UNIQUE KEY `assignment_id_UNIQUE` (`assignment_id`),
-  KEY `fk_episode_assignment_episode_id_idx` (`episode_id`),
-  KEY `fk_episode_assignment_assignment_id_idx` (`assignment_id`),
-  CONSTRAINT `fk_episode_assignment_assignment_id` FOREIGN KEY (`assignment_id`) REFERENCES `assignment` (`assignment_id`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `fk_episode_assignment_episode_id` FOREIGN KEY (`episode_id`) REFERENCES `episode` (`episode_id`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Dumping data for table `episode_assignment`
 --
 
@@ -54,4 +36,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-24  9:01:29
+-- Dump completed on 2024-05-25  4:08:17
