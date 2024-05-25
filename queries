@@ -113,7 +113,7 @@ FROM (
     JOIN recipe_tag rt2 FORCE INDEX (rt_recipe_id_index) ON rt1.recipe_id = rt2.recipe_id
     JOIN recipe r1 FORCE INDEX (r_recipe_id_index) ON rt1.recipe_id = r1.recipe_id
     JOIN recipe r2 FORCE INDEX (r_recipe_id_index) ON rt2.recipe_id = r2.recipe_id
-    JOIN assignment a FORCE INDEX (a_recipe_id_index) ON r1.recipe_id = a.recipe_id
+    JOIN assignment a FORCE INDEX (idx_assignment_id) ON r1.recipe_id = a.recipe_id
     WHERE rt1.tag < rt2.tag
 ) AS tag_pairs
 GROUP BY tag_pair
