@@ -88,6 +88,29 @@ CREATE TABLE `chef` (
   CONSTRAINT `chef_chk_2` CHECK ((`expertise_level` between 1 and 5))
 ) ENGINE=InnoDB AUTO_INCREMENT=379 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`harris`@`localhost`*/ /*!50003 TRIGGER `calculate_age` BEFORE INSERT ON `chef` FOR EACH ROW BEGIN
+    DECLARE current_year INT;
+    DECLARE birth_year INT;
+    
+    SET current_year = YEAR(CURDATE());
+    SET birth_year = YEAR(NEW.date_of_birth);
+    
+    SET NEW.age = current_year - birth_year;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Temporary view structure for view `chef_view`
@@ -140,6 +163,7 @@ CREATE TABLE `episode_assignment` (
   UNIQUE KEY `assignment_id_UNIQUE` (`assignment_id`),
   KEY `fk_episode_assignment_episode_id_idx` (`episode_id`),
   KEY `fk_episode_assignment_assignment_id_idx` (`assignment_id`),
+  KEY `idx_episode_assignment_id` (`assignment_id`),
   CONSTRAINT `fk_episode_assignment_assignment_id` FOREIGN KEY (`assignment_id`) REFERENCES `assignment` (`assignment_id`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `fk_episode_assignment_episode_id` FOREIGN KEY (`episode_id`) REFERENCES `episode` (`episode_id`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -378,6 +402,69 @@ CREATE TABLE `recipe_ingredient` (
   CONSTRAINT `recipe_ingredient_ibfk_2` FOREIGN KEY (`ingredient`) REFERENCES `ingredient` (`name`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`harris`@`localhost`*/ /*!50003 TRIGGER `calculate_nutritional_info` AFTER INSERT ON `recipe_ingredient` FOR EACH ROW BEGIN
+    DECLARE existing_total_calories DECIMAL(10,2);
+    DECLARE existing_total_protein DECIMAL(10,2);
+    DECLARE existing_total_fats DECIMAL(10,2);
+    DECLARE existing_total_carbs DECIMAL(10,2);
+    DECLARE new_total_calories DECIMAL(10,2);
+    DECLARE new_total_protein DECIMAL(10,2);
+    DECLARE new_total_fats DECIMAL(10,2);
+    DECLARE new_total_carbs DECIMAL(10,2);
+    DECLARE ingredient_calories DECIMAL(10,2);
+    DECLARE ingredient_protein DECIMAL(10,2);
+    DECLARE ingredient_fats DECIMAL(10,2);
+    DECLARE ingredient_carbs DECIMAL(10,2);
+
+    -- Retrieve nutritional information for the newly inserted ingredient
+    SELECT calories, protein, fats, carbs INTO ingredient_calories, ingredient_protein, ingredient_fats, ingredient_carbs
+    FROM ingredient
+    WHERE name = NEW.ingredient;
+
+    -- Retrieve existing nutritional information for the recipe
+    SELECT calories, protein, fats, carbs INTO existing_total_calories, existing_total_protein, existing_total_fats, existing_total_carbs
+    FROM nutritional_information
+    WHERE recipe_id = NEW.recipe_id;
+
+    -- Calculate nutritional information for the newly inserted ingredient
+    SET new_total_calories = (NEW.grams * ingredient_calories) / 100;
+    SET new_total_protein = (NEW.grams * ingredient_protein) / 100;
+    SET new_total_fats = (NEW.grams * ingredient_fats) / 100;
+    SET new_total_carbs = (NEW.grams * ingredient_carbs) / 100;
+
+    -- If there are no existing records, insert a new record with the calculated nutritional information
+    IF existing_total_calories IS NULL THEN
+        INSERT INTO nutritional_information (recipe_id, calories, protein, fats, carbs)
+        VALUES (NEW.recipe_id, new_total_calories, new_total_protein, new_total_fats, new_total_carbs);
+    ELSE
+        -- Update existing nutritional information with the new values
+        SET new_total_calories = existing_total_calories + new_total_calories;
+        SET new_total_protein = existing_total_protein + new_total_protein;
+        SET new_total_fats = existing_total_fats + new_total_fats;
+        SET new_total_carbs = existing_total_carbs + new_total_carbs;
+
+        UPDATE nutritional_information
+        SET calories = new_total_calories,
+            protein = new_total_protein,
+            fats = new_total_fats,
+            carbs = new_total_carbs
+        WHERE recipe_id = NEW.recipe_id;
+    END IF;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Temporary view structure for view `recipe_ingredient_view`
@@ -540,6 +627,184 @@ CREATE TABLE `theme` (
 --
 -- Dumping routines for database 'masterchef'
 --
+/*!50003 DROP PROCEDURE IF EXISTS `calculate_assignment_rating` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`harris`@`localhost` PROCEDURE `calculate_assignment_rating`()
+BEGIN
+    DECLARE done INT DEFAULT FALSE;
+    DECLARE assignment_id_val INT;
+    DECLARE rating_sum DECIMAL(5, 2);
+    DECLARE rating_avg DECIMAL(5, 2);
+    
+    -- Declare cursor to fetch assignment IDs where rating is null
+    DECLARE assignment_cursor CURSOR FOR 
+        SELECT assignment_id FROM assignment WHERE result IS NULL;
+    
+    -- Declare continue handler for cursor
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+    
+    OPEN assignment_cursor;
+    
+    assignment_loop:LOOP
+        FETCH assignment_cursor INTO assignment_id_val;
+        IF done THEN
+            LEAVE assignment_loop;
+        END IF;
+        
+        -- Calculate average rating for the assignment
+        SELECT (SUM(rating) / 3) INTO rating_sum
+        FROM assignment_rating
+        WHERE assignment_id = assignment_id_val;
+        
+        SET rating_avg = IFNULL(rating_sum, 0);
+        
+        -- Update assignment table with the calculated average rating
+        UPDATE assignment
+        SET result = rating_avg
+        WHERE assignment_id = assignment_id_val;
+    END LOOP;
+    
+    CLOSE assignment_cursor;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `CreateChefUserView` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`harris`@`localhost` PROCEDURE `CreateChefUserView`(IN given_chef_id INT)
+BEGIN
+    SET @view_sql = CONCAT('
+        CREATE OR REPLACE VIEW chef_user_', given_chef_id, ' AS
+        SELECT  
+            r.name AS recipe_name, 
+            r.recipe_id, 
+            r.main_ingredient, 
+            r.theme_name, 
+            r.sweet, 
+            r.ethnicity AS recipe_ethnicity, 
+            r.difficulty,
+            r.brief, 
+            r.number_steps, 
+            r.tip1, 
+            r.tip2, 
+            r.tip3, 
+            r.portions, 
+            r.preparation_time, 
+            r.cooking_time,
+            CONCAT(c.first_name, '' '', c.last_name) AS chef_name, 
+            c.chef_id, 
+            c.first_name, 
+            c.last_name, 
+            c.ethnicity AS chef_ethnicity, 
+            c.phone, 
+            c.date_of_birth, 
+            c.title,
+            c.experience, 
+            c.year, 
+            GROUP_CONCAT(DISTINCT re.equipment_name) AS equipment_names, 
+            GROUP_CONCAT(DISTINCT rm.meal) AS meals, 
+            GROUP_CONCAT(DISTINCT ri.ingredient) AS ingredients, 
+            GROUP_CONCAT(DISTINCT ri.amount) AS ingredient_amounts, 
+            GROUP_CONCAT(DISTINCT ri.grams) AS ingredient_grams, 
+            GROUP_CONCAT(DISTINCT rt.tag) AS tags
+        FROM 
+            recipe r
+        JOIN 
+            assignment a ON r.recipe_id = a.recipe_id
+        JOIN 
+            recipe_equipment re ON r.recipe_id = re.recipe_id
+        JOIN 
+            recipe_meal rm ON r.recipe_id = rm.recipe_id
+        JOIN 
+            recipe_ingredient ri ON r.recipe_id = ri.recipe_id
+        JOIN 
+            recipe_tag rt ON r.recipe_id = rt.recipe_id
+        JOIN 
+            chef c ON a.chef_id = c.chef_id
+        WHERE 
+            c.chef_id = ', given_chef_id, '
+        GROUP BY 
+            r.recipe_id;
+    ');
+
+    PREPARE stmt FROM @view_sql;
+    EXECUTE stmt;
+    DEALLOCATE PREPARE stmt;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `GetTopRatingsForChef` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`harris`@`localhost` PROCEDURE `GetTopRatingsForChef`(IN chef_id_param INT)
+BEGIN
+    SELECT judge_id, chef_id, SUM(rating) AS total_rating 
+    FROM assignment_rating 
+    WHERE chef_id = chef_id_param
+    GROUP BY judge_id, chef_id 
+    ORDER BY total_rating DESC
+    LIMIT 5;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `UpdateChefExpertiseLevel` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`harris`@`localhost` PROCEDURE `UpdateChefExpertiseLevel`()
+BEGIN
+    UPDATE chef
+    SET expertise_level = CASE
+        WHEN title = 'chef' THEN 5
+        WHEN title = 'sous chef' THEN 4
+        WHEN title = 'A cook' THEN 3
+        WHEN title = 'B cook' THEN 2
+        WHEN title = 'C cook' THEN 1
+        ELSE NULL
+    END;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Final view structure for view `chef_view`
@@ -658,4 +923,4 @@ CREATE TABLE `theme` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-25  4:06:48
+-- Dump completed on 2024-05-25  4:26:55
